@@ -1,0 +1,43 @@
+
+
+ANGULAR - É UMA PLATAFORMA DE DESENVOLVIMENTO.
+                     FRAMEWORK  BASEADO EM COMPONENTES
+                     SWITH
+
+
+1- INSTALAR A IDE - EX VS CODE
+
+2- INSTALAR O NODE - https://nodejs.org/en/ - VERSAO LTS
+
+ABRIR O TERMINAL CMD -    NODE   -V      verificar a versao 
+                                                   NPM    - V      verificar a versao
+
+3- INSTALAR O ANGULAR(na pasta geral ex: usuario raiz) - 
+DENTRO DO CMD - DIGITAR: npm i -g @angular/cli
+
+4- ABRIR O VS CODE - INSTALAR A EXTENSÃO-  angular language (ajuda no auto complete)
+
+5- CRIAR A PASTA DO PROJETO - IR NA IDE - E ABRIR FOLDER
+
+6- IR NO TERMINAL CMD PARA CRIAR O PROJETO - ng new fundamento-angular(esse é o nome do projeto)
+       vai vir mensagem tipo:
+  wold you like add angular rowting? y
+  wich stylesheet format? css
+
+7- ESSES COMANDOS ANTERIORES CRIA TODAS AS PASTAS DA APLICAÇÃO, PROJETO.
+
+8- AGORA ENTRAR DENTRO DA PASTA DO PROJETO QUE FOI CRIADO
+ cd fundamento-angular
+
+9- AGORA TEM QUE RODAR A APLICAÇÃO, JA QUE ESTAMOS AGORA DENTRO DA PASTA DO PROJETO
+NO CMD:  npm start 
+   
+          ESSE COMANDO ACIMA COLOCA O SERVIDOR NO AR.
+
+10- APÓS STARTAR O SERVIDOR - SEGURAR CTRL E CLICAR NO HTTPS PARA ABRIR 
+A PAGINA QUE VEM JÁ NA APLICAÇÃO.  
+
+PROXIMOS PASSOS NO PROXIMO ARQUIVO.
+    
+
+

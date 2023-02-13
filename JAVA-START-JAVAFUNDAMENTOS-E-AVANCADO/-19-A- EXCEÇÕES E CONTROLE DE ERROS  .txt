@@ -1,0 +1,225 @@
+
+
+  QUANDO FAZ O TRATAMENTO DA EXCEÇÃO, O SISTEMA FECHA O METODO QUE ESTÁ
+COM PROBLEMA, E CONTINUA RODANDO. NAO FICA TRAVADO
+
+
+
+   Trata exceção:
+    O try  - contem o comando que pode dar erro
+    cath - captura o erro e mostra a mensagem de erro
+    finally - sempre tem que executar, dando erro ou nao anteriormente
+
+
+   declara no metodo que pode Lança exceção:   
+   throws  
+                    //ex
+   se usar (throws exception) padrao java, usa embaixo o (try , cath)
+   se usar com( throws marg) não padrao java, usa embaixo o (throw ) 
+  
+
+    para lançar exceção:
+    throw
+
+
+
+
+
+
+                                                  //classe PessoaDao
+package Cadastros;
+
+	import java.sql.SQLException;
+	import java.util.ArrayList;
+	import java.util.List;
+
+	public class PessoaDao extends Dao {
+		
+		public void incluirPessoa(Pessoa p) throws Exception {
+			open();
+			stmt = con.prepareStatement("insert into pessoa values(?,?,?)");
+			stmt.setInt(1, p.getIdPessoa());
+			stmt.setString(2, p.getNomePessoa());
+			stmt.setString(3, p.getEmail());
+			stmt.execute();
+			stmt.close();
+			close();
+		}
+
+		
+		public boolean alterarPessoa(Pessoa p) throws Exception {
+			open();
+			stmt = con.prepareStatement("update Pessoas set nomepessoa = ?, email = ? where idPessoa = ?");
+			
+			try {
+			
+			stmt.setString(1, p.getNomePessoa());
+			stmt.setString(2, p.getEmail());
+			stmt.setInt(3, p.getIdPessoa());
+			stmt.execute();
+		
+		} 
+		catch (SQLException ex) {   //
+			
+		System.out.println("Erro: " + ex.getMessage() + stmt);
+			stmt.close();
+			close();
+			return false;
+			
+		}
+			stmt.close();
+			close();
+			return true;
+		}
+
+		public void excluirPessoa(Pessoa p) throws Exception {
+
+			open();
+			stmt = con.prepareStatement("delete from Pessoa where idPessoa = ?");
+			stmt.setInt(1, p.getIdPessoa());
+			stmt.execute();
+			stmt.close();
+			close();
+
+		}
+		// retornando um objeto
+		public Pessoa consultarPessoaIndividual(int cod) throws Exception {
+				open();                                                         
+				stmt = con.prepareStatement("select * from pessoa where idPessoa = ? "); //esse exclamaçao é isso aqui  setInt(1, cod);//
+				stmt.setInt(1, cod);  //esse cod vai ser setado, é o codigo do metodo//
+				try {          
+					rs = stmt.executeQuery();			
+				}
+				catch (SQLException ex) {
+					System.out.println("Falha ao recuperar o registro Contate TI");
+					ex.printStackTrace();
+					throw new Exception(ex);
+				}
+				finally {
+					System.out.println("Fechando a conex�o com banco de dados no Finally");
+					close();
+				}
+				Pessoa p = null;
+				if (rs != null) {
+					if (rs.next()) {
+						p = new Pessoa();
+						p.setIdPessoa(rs.getInt("idPessoa"));
+						p.setNomePessoa(rs.getString("nomePessoa"));
+						p.setEmail(rs.getString("email"));				
+					}
+				}
+				close();
+				return p;
+		}
+
+		public List<Pessoa> ListarPessoas() {
+			try {
+				open();
+				stmt = con.prepareStatement("select * from pessoa");
+				rs = stmt.executeQuery();
+		        List<Pessoa> listaPessoas = new ArrayList<>();
+				while (rs.next()) {
+					Pessoa p = new Pessoa();
+					p.setIdPessoa(rs.getInt("idPessoa"));
+					p.setNomePessoa(rs.getString("nomePessoa"));
+					p.setEmail(rs.getString("email"));
+					listaPessoas.add(p);
+				}
+				close();
+				return listaPessoas;
+				
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+				return null;
+			}
+		}
+	}
+	
+	
+2   º      ///                            Classe Menu  (main)
+
+package Cadastros;
+
+import java.util.List;
+
+public class Menu {
+			public static void main(String[] args) {
+				PessoaDao pd = new PessoaDao();
+				try {
+					 //Incluir uma pessoa
+					      
+					  
+		//crio os objetos/instancias, quantos for preciso//       //esse é o contrutor criado na classe pessoa, preencher na ordem que está la no construtor.//
+				/*	Pessoa p1 = new Pessoa(11,"mar", "jose@gmail.com");
+					Pessoa p2 = new Pessoa(12,"han", "jose@gmail.com");
+					Pessoa p3 = new Pessoa(13,"reb", "jose@gmail.com");  
+					
+					//dai chamo o metodo que está na classe pessoaDao para incluir os dados do objeto//
+					pd.incluirPessoa(p1);
+					pd.incluirPessoa(p2);
+					pd.incluirPessoa(p3);
+				*/	
+					// Alterar uma pessoa
+					// - Alterar a informa��o desejada usando o set(Classe encapsulada)
+					try {
+						Pessoa pes = pd.consultarPessoaIndividual(1);
+						// se o resultado da consulta a pessoa retornar null � porque n�o encontrou
+						// a pessoa
+							pes.setEmail("derlon.aliendres@gmail.com");
+						// chamar o m�todo de cont�m o comando update
+						if (pd.alterarPessoa(pes)){
+						    System.out.println("Pessoa alterada com sucesso");
+						};
+					
+						// Listando todas as pessoas
+						List<Pessoa> listaPessoas = pd.ListarPessoas();
+						for(Pessoa p : listaPessoas){
+							System.out.println("Id.: " + p.getIdPessoa());
+							System.out.println("Nome : "  +p.getNomePessoa());
+							System.out.println("Email : " +p.getEmail());
+						}
+					}
+					
+						catch (Exception e) {
+							System.out.println("Error:  " + e.getMessage());
+						}
+					
+				
+					//Excluir uma pessoa    
+					// verificar se a pessoa existe por c�digo
+					Pessoa pessoa1 = pd.consultarPessoaIndividual(3);
+				     pd.excluirPessoa(pessoa1);// chamar o m�todo que cont�m o comando delete
+					
+				
+					// Listando todas as pessoas
+					List<Pessoa> listaPessoas = pd.ListarPessoas();
+					for(Pessoa p: listaPessoas){
+						System.out.println("Id.: " + p.getIdPessoa());
+						System.out.println("Nome : "  +p.getNomePessoa());
+						System.out.println("Email : " +p.getEmail());
+					}
+					
+				
+			}catch (Exception e) {
+					System.out.println("Error:  " + e.getMessage());
+				}
+			}
+}
+				  
+				 
+				
+			
+				
+
+
+
+	
+
+
+
+
+
+
+
+
+

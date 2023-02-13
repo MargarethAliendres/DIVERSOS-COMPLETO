@@ -1,0 +1,141 @@
+
+                                       // parametro de rota produtos    
+      http://localhost:4200/produtos/1    detalha o produto com esse id
+                                                     // 1 parametro de rota  1  id
+
+                                    // parametro de rota cliente            query parametris
+     http://localhost:4200/cliente?nome:Joao&idade=23   filtros, achar todos os clientes com esses dados
+                                               //parametro de consulta ?nome:Joao&idade=23
+
+
+PAGINA COM PARAMENTROS
+
+
+1° parametro de rota
+
+
+
+CRIAR UM COMPONENT pagina-com-parametro
+
+NO app.routing.modules.ts    adicione 
+
+import { Component, NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';        // importa  tambem a array list Routes//
+import { PrimeiraPaginaComponent } from './primeira-pagina/primeira-pagina.component';   //importa a pagina//
+import { SegundaPaginaComponent } from './segunda-pagina/segunda-pagina.component';   //importa a pagina//
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';//importa a pagina//
+import { PaginaComParametroComponent } from './pagina-com-parametro/pagina-com-parametro.component';//importa a pagina//
+
+//array list de rotas//
+const routes: Routes = [
+   {path:"primeira-pagina", component: PrimeiraPaginaComponent},
+   {path: "segunda-pagina", component: SegundaPaginaComponent},
+       //no navegador vai aparecer esse caminho//
+   {path: "", redirectTo: "primeira-pagina", pathMatch:"full"},         //quando na url principal nao colocar nenhum caminho esse  /primeira-pagina, ele vai redirecionar automaticamente para a primeira pagina//
+     //no navegador vai aparecer esse caminho//                      // somente quando o caminha estiver vazio, quando tiver especificado dai abre a pagina especificada//
+  
+ //parametro da rota
+  {path:" pagina-com-parametro/:id", component: PaginaComParametroComponent},  //ESSE AQUI COM PARAMETRO
+     //AQUI ESTAMOS PASSANDO O PARAMETRO /:id , podia ser /:nome  e etc..//
+
+   {path: "**", component:PaginaNaoEncontradaComponent }
+           //esse asteristico define que qualquer endereço que for digitado que nao está definido a pagina nao existe. dai carrega essa pagina de nao encontrado.   ex /primeira-pagina1
+]
+@NgModule({
+  declarations: [],       //usaremos esse metodo passando as rotas da lista acima//
+  imports: [ RouterModule.forRoot(routes)],
+  exports: [ RouterModule]    // só assim fica disponivel para o app.module.ts usar//
+})
+
+
+export class AppRoutingModule { }
+
+
+agora vá no pagina-com-parametro.ts que fora criado inicialmente
+
+import { Component } from '@angular/core';
+import { ActivatedRoute, Route } from '@angular/router';
+
+@Component({
+  selector: 'app-pagina-com-parametro',
+  templateUrl: './pagina-com-parametro.component.html',
+  styleUrls: ['./pagina-com-parametro.component.css']
+})
+export class PaginaComParametroComponent {
+   id: number | null = null;
+
+
+  constructor(private route: ActivatedRoute){      // extrai o id de dentro da rota, a qual passamos de parametro lá
+
+  }
+  ngOnInit():void{
+   this.route.paramMap.subscribe(params => {
+      this.id = Number(params.get("id")); 
+
+   })
+
+  }
+
+
+agora vá no pagina-com-parametro.component.html
+
+<p>Parametro da rota:{{id}}</p>
+
+
+
+para visualizar digite no     http://localhost:4200/pagina-com-parametro/1   se não colocar esse valor no final, retorna pagina nao encontrada.
+
+
+******************************************************************************************
+
+
+2° parametro de consulta
+
+usando o mesmo componente do parametro acima:
+
+somente vá em pagina-com-parametro.component.ts e coloque isso abaixo
+
+import { Component } from '@angular/core';
+import { ActivatedRoute, Route } from '@angular/router';
+
+@Component({
+  selector: 'app-pagina-com-parametro',
+  templateUrl: './pagina-com-parametro.component.html',
+  styleUrls: ['./pagina-com-parametro.component.css']
+})
+export class PaginaComParametroComponent {
+   id: number | null = null;
+
+   idade: number | null = null;
+   nome: string | null ="";
+
+  constructor(private route: ActivatedRoute){      // extrai o id de dentro da rota, a qual passamos de parametro lá
+
+  }
+  ngOnInit():void{
+   this.route.paramMap.subscribe(params => {      //faz parte do parametro de roteamento
+      this.id = Number(params.get("id"));         //esse coloca paramentro no (app.routing.module.ts)
+
+  this.route.queryParamMap.subscribe(params =>{
+      this.idade = Number(params.get("idade"));   //faz parte parametro de consulta
+      this.nome = params.get("nome");               //obs: esse de consulta não coloca nada no (app.routing.module.ts)
+ })
+
+    })
+
+  }
+
+}
+
+
+agora vá no pagina-com-parametro.component.html
+
+<p>Parametro da rota:{{id}}</p>     //esse do parametro da rota
+
+<p *ngIf="nome"> query param de nome:{{nome}}</p>        esse do parametro da consulta
+<p *ngIf="idade"> query param de idade:{{idade}}</p>
+
+<!--esse *ngIf significa se eu tiver nome ou se eu tiver idade--> 
+<!-- só vai aparecer algo se eu preencher no browser as inforaç~es de consulta -->
+<!-- http://localhost:4200/pagina-com-parametro/4?nome=joao&idade=23-->
+

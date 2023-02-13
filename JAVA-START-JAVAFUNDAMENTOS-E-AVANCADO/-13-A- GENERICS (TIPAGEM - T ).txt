@@ -1,0 +1,123 @@
+
+       TIPAGEM
+
+ UMA FORMA  DE UTILIZAR, tipar UMA CLASSE E REUTILIZAR ESSE tipoVARIAS
+VEZES.
+
+
+pode pegar um objeto e tipar e dentro da ultilzação da classe utilizar como quiser,
+evita reescrita de codigo, reduz necessidade de uso de cache para ficar fazendo 
+conversão de dados toda hora.
+
+NÃO PRECISA MUDAR O TIPO DE DADOS, NAS CLASSES ORIGINAL QUANDO MUDA O TIPO DE 
+DADOS NA PRNCIPAL MAIN.
+
+FACILITA BASTANTE O DESENVOLVIMENTO
+
+1º cria a classe colocando no final do nome da classe <T>
+depois, coloca T em varios locais abaixo
+
+package Controle;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AeronavesComGenerics<T> {
+	private List<T> listaAeronaves = new ArrayList<>();
+	
+	public void addVoo(T nrVoo) {
+		//listaAeronaves.add("3520");
+		listaAeronaves.add(nrVoo);
+	}
+	
+	public T primeiroVoo() {
+		if (listaAeronaves.isEmpty()) {
+			throw new IllegalStateException("List is empty");
+		}
+		return listaAeronaves.get(0);
+	}
+	
+	public void listaVoos() {
+		System.out.print("[");
+		if (!listaAeronaves.isEmpty()) {
+			System.out.print(listaAeronaves.get(0));
+		}
+		for (int i = 1; i < listaAeronaves.size(); i++) {
+			System.out.print(" " + listaAeronaves.get(i));
+		}
+		System.out.print("]");
+	}
+}
+
+
+2° chame na classe principal com a tipagem que quiser, que irá refletir nas classe filha
+   
+                                   //tipo Integer
+
+package Controle;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AeronavesComGenerics<T> {
+	private List<T> listaAeronaves = new ArrayList<>();
+	
+	public void addVoo(T nrVoo) {
+		//listaAeronaves.add("3520");
+		listaAeronaves.add(nrVoo);
+	}
+	
+	public T primeiroVoo() {
+		if (listaAeronaves.isEmpty()) {
+			throw new IllegalStateException("List is empty");
+		}
+		return listaAeronaves.get(0);
+	}
+	
+	public void listaVoos() {
+		System.out.print("[");
+		if (!listaAeronaves.isEmpty()) {
+			System.out.print(listaAeronaves.get(0));
+		}
+		for (int i = 1; i < listaAeronaves.size(); i++) {
+			System.out.print(" " + listaAeronaves.get(i));
+		}
+		System.out.print("]");
+	}
+}
+
+
+
+                                           //tipo String
+
+package Embarque;
+import java.util.Scanner;
+
+import Controle.Aeronaves;
+import Controle.AeronavesComGenerics;
+
+/*
+ * Informar a quantidade de aeronaves no p�tio, o nr dos v�os por ordem de chegada. 
+ * A ordem de decolagem � FIFO, o primeiro que entra � o primeiro que sai. 
+ * Mostrar qual o primeiro v�o � decolar
+ */
+public class PrincipalComGenerics {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in) ;
+		AeronavesComGenerics<String> air = new AeronavesComGenerics<>();
+		System.out.println("Informe o nr de aeronaves");
+		int nrAeronaves = sc.nextInt();
+		
+		// adicionando voos
+		for (int i = 0; i < nrAeronaves; i++) {
+			String nrVoo = Integer.toString(sc.nextInt());        //teve que colocar um integer toString
+			air.addVoo(nrVoo);
+		}
+		air.primeiroVoo();
+		String x = (String) air.primeiroVoo();
+		System.out.println("O primeiro a decolar � o voo :" + x);
+		air.listaVoos();
+		sc.close();
+	}
+}

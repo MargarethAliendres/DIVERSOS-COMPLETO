@@ -1,0 +1,96 @@
+
+    QUANDO CRIA UM COMPONENTE, LOGO DE INICIO DENTRO DA CLASSE 
+ TEM POR PADRÃO (ngOnInit)
+
+ngOnInit - primerio ciclo de vida que dispara quando renderiza um componente.
+
+  ( DENTRO DE ciclo-devida-componente.component.ts)
+export class CicloDevidaComponenteComponent implements OnInit {
+
+     horario = new Date();
+     timer: any = null!;
+
+  ngOnInit(): void {
+      console.log("o evento OnInit disparou");
+      this.timer = setInterval(() => this.horario = new Date(), 1000);
+  }
+}
+
+(DENTRO DE ciclo-devida-componente.component.html)
+
+<h2>Horario: {{horario | date:"HH:mm:ss"}}</h2>
+
+
+(DENTRO DEapp.component.html)
+<app-ciclo-devida-componente></app-ciclo-devida-componente>
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------
+   CICLO DE VIDA PAI E FILHO
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-ciclo-de-vida-pai',
+  templateUrl: './ciclo-de-vida-pai.component.html',
+  styleUrls: ['./ciclo-de-vida-pai.component.css']
+})
+export class CicloDeVidaPaiComponent {
+
+  texto ="";
+
+}
+
+
+COMPONENTE HTML DO PAI
+
+<h2>ciclo de vida</h2>>
+<label for="texto"> digite um texto:</label>
+<input type="text" id="texto" [(ngModel)]="texto">
+<app-ciclo-de-vida-componente [texto]="texto"></app-ciclo-de-vida-componente>
+
+
+
+
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+
+@Component({
+  selector: 'app-ciclo-de-vida-componente',
+  templateUrl: './ciclo-de-vida-componente.component.html',
+  styleUrls: ['./ciclo-de-vida-componente.component.css']
+})
+export class CicloDevidaComponenteComponent implements OnInit, OnChanges, OnDestroy {
+
+     horario = new Date();
+     timer: any = null!;
+
+     @Input() texto = "";    //trazendo do pai//
+
+  ngOnInit(): void {
+      console.log("o evento OnInit disparou");
+      this.timer = setInterval(() => this.horario = new Date(), 1000);
+  }
+              //ESTE EVENTO OnChange dispara primeiro que o OnInit
+  ngOnChanges(changes: SimpleChanges): void {  //depois que criou o ciclo-de vida pai colocamos esse metodo que traz as mudanças dos evetos//
+      console.log(changes);
+  }
+  ngOnDestroy(): void {                 //cancela evento// limpa
+      clearInterval(this.timer);    // todo evento colocado de tempos em tem´pos deve ser cancelados/limpos//
+  }
+}
+
+
+COMPONENTE HTML DO FILHO
+
+<h2>Horario: {{horario | date:"HH:mm:ss"}}</h2>
+
+
+
+VAI NO APP.COMPONENTE HTML
+E COLOCA SÓMENTE O PAI 
+
+<app-ciclo-de-vida-pai><app-ciclo-de-vida-pai>     //todo o resultado sera mostrado no console log, o que foi alterado
+
+

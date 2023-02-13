@@ -1,0 +1,14 @@
+
+  AO CRIAR O PROJETO TEM VARIOS TIPOS:
+
+
+EX: NO ECLIPSE, NA BARRA DE FERRAMENTAS 
+
+FILE -NEW-   Java Project   (esse é um projeto desktop)
+
+
+apos clicar lado direito mouse - src-new-package-(programas)
+
+após isso crie o que quiser, class, interface etc.
+                    
+

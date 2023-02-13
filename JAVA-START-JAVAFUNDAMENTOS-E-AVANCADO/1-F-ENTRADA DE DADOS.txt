@@ -1,0 +1,21 @@
+import javax.swing.JOptionPane;
+
+public class StartCapgemini {
+	
+
+	public static void main(String[] args) {
+		
+		int idade;
+		//ESSE Integer.parseInt FAZ COM O NUMERO DIGITADO FIQUE INTEIRO)
+		// ESSE E A SWING DE INTERFACE QUE TRAZ O INPUT (JOptionPane.showInputDialog("Digite sua idade aqui:")
+		idade = Integer.parseInt(JOptionPane.showInputDialog("Digite sua idade aqui:"));
+		
+		// System.out.println("A idade digitada é: " + idade);
+		
+		JOptionPane.showMessageDialog(null,"A pessoa tem " + idade + " anos de idade");
+		//ESSE TRAS UMA MENSAGEM COM A IDADE
+		
+		JOptionPane.showMessageDialog(null, "Teste", "ATENCAO !!", 1);
+		//ESSE ABAIXO ESTA PERSONALIZADO, VE ACIMA NOME DA CAIXA E A MENSAGEM É TESTE,
+		 //ESSE NUMERO PODE IR TROCANDO QUE VEM OUTRAS IMAGENS PERTO DA MESAGEM
+	                                                             

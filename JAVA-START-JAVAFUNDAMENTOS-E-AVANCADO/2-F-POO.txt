@@ -1,0 +1,49 @@
+
+
+* CLASSE ELEMENTO QUE EXPRESSA EM VARIVEIS O QUE TEM NO MUNDO REAL
+* VARIAVIES SAO ATRIBUTOS DAS CLASSES, E ESTES ATRIBUTOS QUE ESTARÃO
+NA TABEL DO BANCO DE DADOS.
+
+* INSTANCIAÇÃO - É CRIAR O OBJETO (pess é o objeto criado)  Pessoa pess = new Pessoa();
+usa um construtor NEW para criar um objeto ligado a classe.
+e os objetos, sempre vao referenciar os atributos e metodos da classe.
+
+
+__________________________________________________classe Principal que tem a main
+
+public class Principal {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Pessoa pess = new Pessoa();
+		pess.nomePessoa = "Margareth";
+		pess.idadePessoa = 20;
+		pess.mostrarDados(pess.nomePessoa, pess.idadePessoa);
+
+	}
+
+}
+
+___________________________________________________ classe Pessoa não tem o metodo main
+import javax.swing.JOptionPane;
+
+public class Pessoa {
+	
+     public String nomePessoa;
+     
+     public int idadePessoa;
+    
+                                                                              //metodo//
+     public void mostrarDados(String pNome, int pIdade ) {
+    	 JOptionPane.showMessageDialog(null,"o nome é " + pNome);
+    	 JOptionPane.showMessageDialog(null,"a idade é " + pIdade);
+    	 
+    	 // no lugar desse Option pode ser 
+    	 
+    	// System.out.println("o nome é " + pNome);
+    	// System.out.println("a idade é " + pIdade);
+    	 
+     }
+
+}

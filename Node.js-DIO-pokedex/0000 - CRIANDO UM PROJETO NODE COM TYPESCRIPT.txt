@@ -1,0 +1,70 @@
+
+
+APÓS INSTALADO O NODE
+no cmd
+
+mkdir pwa (cria o diretorio do projeto)
+cd entra dentro da pasta do projeto criada
+
+npm init - y (cria o pacote jason)
+npm install typescript -D (instala o typescript)
+
+npm  install express (cria a dependencia)
+
+mkdir src  (cria o diretorio dos arquivos)
+
+abrir a pasta do projeto criado no VSCode
+
+lado direito mouse encima da pasta src - newfile - criar o arquivo server.ts (carregará o projeto)
+
+   logo dentro desse arquivo fazer um import
+
+        import express from express;     (se der erro no express na caixa de erro vira um endereço
+                                                            npm i --save-dev @types/express  volte no cmd e instale
+       e ainda dentro desse arquivo colocar o codigo abaixo
+
+import express, { response } from 'express';
+
+
+const app = express();
+
+app.get('/', (request, response) => {
+
+    return response.json({message: 'ola dev'});
+});
+
+app.listen(3333, ()  => {
+    console.log('Server started on port 3333')
+});
+
+
+logo após o arquivo pronto, no cmd rodar o comando
+
+  npx tsc --init  (rodará o typescrypt/configuração que está em binario, nesse projeto)
+a direita estara a pasta criada com esse comando - tsconfig.json - abrir ela e tirar o comentario 
+de // "outDir": "./",    e colocar     "outDir": "./dist",  (local que ficará os arquivos compilados)
+ // "rootDir": "./",      e colocar      "rootDir": "./src",  (local do projeto)
+
+ logo após as configurções anteriores, agora compilar o projeto:
+   npx tsc (criará a pasta dist a direita com o arquivo server.js)(esse é o arquivo que o node conseguira
+interpretar.   (para rodar o servidor)  (ambiente de produção)
+
+   agora é o server.js que será exxecutado para rodar a aplicação
+node dist/server.js  (para rodar o servidor)  (ambiente de produção)
+
+ ir no browser e colocar: localhost:3333
+
+ 
+para ambiente de desenvolvimento não são esses dois ultimos passos.
+
+
+
+   
+
+
+
+
+
+
+recurso de tipagem, antes de colocar em produção tem que compilar gerando o javascript para
+o node interpretar e o browser

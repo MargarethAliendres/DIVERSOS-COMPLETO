@@ -1,0 +1,24 @@
+
+
+* PERMITE CONTROLAR A VISIBILIDADE DE DETERMINADOS ELEMENTOS
+
+    MAIS CRITICO PARA O MENOS CRITICO
+
+
+    PRIVATE  - DEFAULT  -  PROTECTED  -  PUBLIC
+
+
+DE UMA CLASSE OU MENBRO DE UMA CLASSE(ATRIBUTOS, METODOS)
+
+**NO JAVA TEM DOIS NIVEIS DE MODIFICADORES DE ACESSO:
+
+NIVEL SUPERIOR 
+aplicados a classe:  public   (
+                             default(nao tem modificador explicito, quando nao coloca nemhum, altomaticamente ele assume default))
+
+NIVEL DE MEMBROS
+aplicados em atributos e metodos: private  - (nao acessa nada) precisa instanciar a classe   
+			    default (quando nao coloca nemhum, altomaticamente ele assume default - (só acesso na classe e no mesmo pacote)
+                                                     protected  - (acessado por classes do mesmo pacote, ou classes derivadas mesmo estando em pacote diferente.)
+                                                     public   - (permite que qualquer outra parte da aplicacao acesse ao componte marcado como public)
+   

@@ -1,0 +1,22 @@
+p {color:1; font-size: 30px; 
+
+text-align: center;
+
+
+}
+
+
+
+table {border-color: blue; font-size: 40;}
+
+body{
+	background-image:URL(flor.jpg);
+	background-attachment:scroll;
+	background-position:100% 300%;
+	background-position:top left ;
+	background-repeat:repeat-x;
+    background-size:cover;	
+    
+}
+
+

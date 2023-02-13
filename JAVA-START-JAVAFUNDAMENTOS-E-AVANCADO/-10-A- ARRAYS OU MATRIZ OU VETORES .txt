@@ -1,0 +1,202 @@
+
+
+* ARRAYS -ESTRUTURA DE DADOS HOMOGENIA, OU SEJA TRABALHA COM UM 
+UNICO TIPO DE DADOS.
+
+UNIMENDISIONAL -VETORES
+BIDIMENSIONAL - MATRIZES
+
+
+  declara o array - define o tipo de dado, usar simbologia que o programa entenda que é array-e dar nome ao array 
+o array deve ser construido, é o new o construtro padrao de array.
+
+
+--- [ ] simbologia padrao que identifica um array.
+
+--- o arrray sempre começa na posição 0.
+
+FORMA MAIS SIMPLES DE DECLARAR UM ARRAY.
+
+int[ ] numeros = new int [ 4 ];  (um unico array)
+
+int [ ] numero1 = new int [ 3 ], numero 2 = new int [10];  (varios arrays)
+
+
+  OU ASSIM;
+
+int [ ] numeros;
+numeros = new int [ 10 ];
+
+
+TAMBEM TEM COMO FAZER A INICIALIZAÇÃO DO ARRAY COM VALORES, DAI COLOCA OS VALORES
+E NÃO QUANTAS PÓSIÇOES O ARRAY VAI TER:
+
+EX: int [ ] quartos = {10 ,20, 25, 30, 35, 40};
+
+
+TEM A OPCAO DE FAZER O ARRAY PARA DEPOIS ALOCAR
+        int[ ] meuarray;
+daí quando for alocar coloca assim:
+      meuarray = new int [10];
+depois inicia o 1º elemento
+      meuArray [0] = 100;
+
+------------------------------------------------------------------------------------------------------s
+
+visualiazar:
+System.out.println(numero1[ 0 ]);
+
+o FOR é uma estrutura de laço de repeticao padrão utilizado para fazer varredura em matriz.
+
+-----------------------------------------------------------------------------------------------------------------------
+quando precisar inicializar, com numero primitivo inicia com (0)
+com numero booleano inicia com (FALSE)
+e para referencias (NULL)
+MAS PODE INICIALIZAR COM O NUMERO QUE QUISER OU PRECISAR.
+
+_________________________________________________________________________
+
+                                             ARRAY UNIDIMENSIONAL - VETORES
+
+1ºJEITO DE FAZER É A DECLARAÇÃO DIRETA
+
+package TrabalhandoArray;
+
+import javax.swing.JOptionPane;
+
+public class TrabalhandoArray {
+
+	public static void main(String[] args) {
+		//declarando o array
+		String [] paises = new String[5];
+		 
+		// inicializando o array
+		paises[0] = "Brasil";
+		paises[1] = "Alemanha";
+		paises[2] = "It�lia";
+		paises[3] = "�ustria";
+		paises[4] = "Pol�nia";   
+
+		for (String lista: paises) {                 //crio um objeto lista que vai conter o array.
+	                System.out.println(lista);               //daí printa a lista
+		}
+
+                 o FOR vai varre item a item enquanto tiver ele mostra, até nao ter mais e ele parar
+
+2º JEITO DE FAZER DE FAZER INSERÇÃO DE FORMA INTERATIVA
+que pode vir de um  metodo Scanner
+de uma Tela
+do classe jOptionPane
+
+public class arrayteste {
+
+	public static void main(String[] args) {
+
+		//declarando o array
+		String [] paises = new String[4];             // tipo string
+		 
+		// inicializando o array
+		for (int i = 0; i < 4; i++) {           //o i é a posição do vetor que inicia com zero
+			
+			 paises[i] = JOptionPane.showInputDialog("Digite um pais:");
+			
+		}
+		;   
+
+		for (String listaPaises: paises) {                 //crio um objeto listaPaises que vai conter o array.
+	      System.out.println(listaPaises);               //daí printa a lista
+		}
+	}
+}
+
+
+3º JEITO DE FAZER DE FAZER INSERÇÃO DE FORMA INTERATIVA
+public static void main(String[] args) {
+
+        int [] numeros = new int [10];                     //tipo numero tem que colocar o Integer.parseInt
+		                                         //o Integer.parseInt abaixo é para transfomar os valores colocados na caixa que é string em numero)
+         for (int i = 0; i < 10; i++) {
+       numeros[i] = Integer.parseInt(JOptionPane.showInputDialog("Informe um numero"));
+       }   
+	             
+       for (int listaNumeros : numeros) {
+       System.out.println(listaNumeros);
+        } 
+                                 //MUDANDO O VALOR  DO CAMPO
+        int novoValor = 11;                   
+        numeros[ 8 ] = novoValor  + 4        //o valor da posicao 8 sera 15    DO EXEMPLO ACIMA
+ 
+        for (int listaNumeros : numeros) {
+       System.out.println(listaNumeros);
+			
+    }
+}   
+
+ 4º COMO MUDAR UM VALOR DE UM CAMPO DENTRO  DE UM ARRAY            
+   
+    int novoValor = 11;                   
+   numeros[ 8 ] = novoValor  + 4        //o valor da posicao 8 sera 15    DO EXEMPLO ACIMA
+    //COLOCA A POSIÇÃO QUE QUER ALTERAR.
+
+
+__________________________________________________________________________
+
+                                             ARRAY VETOR BIDIMENSIONAL- MATRIZ
+
+import javax.swing.JOptionPane;
+
+public class Matrizes {
+
+	public static void main(String[] args) {
+		/*
+		 * Escreva um algoritmo que solicite ao usu�rio a entrada de 4 notas 
+		 * para cada aluno, calcular a m�dia dos alunos e exibir em tela. 
+		 * Ao final mostrar a m�dia da turma. 
+		 * Ao lado da m�dia do aluno deve seguir a seguinte regra de neg�cio.
+		 * Se m�dia >= 7,5               Aluno Aprovado
+		 * Se m�dia >= 5,5 e <7,5   Aluno em Recupera��o
+		 * Se m�dia  < 5,5                Aluno Reprovado
+		*/
+		// Vetor dos alunos
+		String [] alunos = {"JOAO","JOS�","MARIA"};
+	
+		// Matriz das notas       // 3 LINHA  4 COLUNA
+		float [][] notas = new float[3][4];    //MATRIZ INICIA COM 2 COLCHETES QUE SIGNIFICA MATRIZ
+		
+		// para controlar o somat�rio das notas de cada aluno
+		// para calcular a media do aluno
+		float somaNotas, mediaAluno;
+		// par armazenar o status do aluno e usar para imprimir o boletim depois
+		String statusAluno;
+		
+		// informar as notas dos alunos
+		// la�o externo para associar aluno � nota
+		for (int i = 0; i < 3; i++) {                      //ABASTECE A LINHA
+			System.out.println("Aluno : " + alunos[i]);
+			// la�o interno para informar as notas de cada aluno
+			somaNotas = 0;           //ZERA A NOTA PARA IR PARA NOVO ALUNO
+			mediaAluno = 0;          
+		    for (int j = 0; j < 4; j++) {                //ABASTECE A COLUNA                   //(j+1)APARECE O NUMERO, NAO VAI SOMAR SÓ MOSTRA QUAL E A NOTA A SER INSERIDA 
+				notas[i][j] = Float.parseFloat(JOptionPane.showInputDialog("Informe a nota n� " + (j+1) + " do aluno " + alunos[i]));
+			    somaNotas = somaNotas + notas[i][j];
+			}
+			mediaAluno = somaNotas / 4;
+			if	(mediaAluno < 5.5) {
+				statusAluno = "REPROVADO";
+			} else if (mediaAluno >= 5.5 && mediaAluno <= 7.5) {
+				statusAluno = "EM RECUPERA��O";
+			} else {
+				statusAluno = "APROVADO";
+			}
+			// impress�o do boletim
+			System.out.println("\n************ BOLETIM *************");
+			System.out.println("Aluno.: " + alunos[i]);
+			System.out.println("Notas");
+FOR		     for (int j1 = 0; j1 < 4; j1++) {
+EACH				                  //ESSE +1  SO PARA APARECER A POSIÇAO DA NOTA
+MOSTRA 		System.out.println((j1+1) + " - " + notas[i][j1]);
+A			}
+LISTA			System.out.println("M�dia ..: " + mediaAluno + " - " + statusAluno);
+		}
+	}
+}

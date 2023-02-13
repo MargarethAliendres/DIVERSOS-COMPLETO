@@ -1,0 +1,86 @@
+
+* existem dois  tipos de construtores que são elementos cria dentro da classe, toda classe tem que ter
+pelo menos um construtor
+
+**simples - passa um parametro.
+**e com sobrecarga- passa varios parementros.
+
+**varivael this. ( tem a função de diferenciar o valor que o construtor recebeu e da variavel que foi 
+criada dentro da classe.
+
+        em uma classe encapsulada, privada é o CONSTRUTOR que faz o papel de comunicador, link 
+da parte interna da classe para a parte interna, idem.
+
+****os contrutores fazem o meio de campo da parte externa 
+e na classe em si e seus metodos.
+
+
+1º criar a classe                                                           //ctrl+3   abre para gerar o construtor
+                                                                        //deleta o construtor super, só usa se a classe tiver herança
+
+package Construtores;
+
+
+public class Aluno {
+	
+	private double nota1;
+	private double nota2;
+	private double nota3;
+	STATUS situacaoAluno;
+	
+	
+	public Aluno(double nota1, double nota2, double nota3) {
+		
+		this.nota1 = nota1;
+		this.nota2 = nota2;
+		this.nota3 = nota3;
+	}
+	
+
+	// DEFININDO UM ENUMERADOR
+
+	public enum STATUS {
+                     APROVADO,
+	     REPROVADO
+	}
+
+	// M�todo para calcular m�dia do aluno
+	public double calcularMediaAluno() {
+		double mediaAluno = 0;
+		// c�lculo da media
+		mediaAluno = (this.nota1 + this.nota2 + this.nota3) / 3;
+		return mediaAluno;
+	}
+}
+	
+
+2º crie a classe principal
+
+package Construtores;
+
+import Construtores.Aluno.STATUS;
+
+public class Construtor {
+
+	public static void main(String[] args) {
+
+      
+       Aluno alu = new Aluno(6,7,8);             // nesse caso, como criei um construtor, já deve colocar o valor aqui logo quando estou criando o objeto
+		
+     double mediaAlunoFinal = alu.calcularMediaAluno();        //crio essa variavel mediaAlunoFinal  para validar o if eslse abaixo e coloco o retorno dentro de  alu.situacaoAluno 
+		
+		
+		if (mediaAlunoFinal < 6) {
+			
+			alu.situacaoAluno = STATUS.REPROVADO;
+			
+		}else {
+			alu.situacaoAluno = STATUS.APROVADO;
+		}                     
+		                                                       //aqui chamo o metodo e  alu.situacaoAluno
+		System.out.println("A media do aluno é " + alu.calcularMediaAluno() + " e o aluno foi " + alu.situacaoAluno); 
+
+	}
+
+}
+	

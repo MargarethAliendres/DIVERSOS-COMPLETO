@@ -1,0 +1,37 @@
+
+
+<!DOCTYPE html>
+  <html lang="pt-BR">
+   <head>
+     <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Exemplo jQuery</title>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+     
+
+     <script>     // o objeto nesse caso que foi colocado, doi todo o html, mas colocar a tag que for redenrizar,------
+          $(document).ready(function() {    //esse ready chana a função e indica que so pode rodar o script depois do html carregado
+              alert("Mensagem de alerta fazendo uso da jQuery.");
+               });
+
+        </script>
+        <style>
+        .estilo1{
+            background-color: lightgreen;
+            border: 1px solid;
+        }
+      </style>
+        <script>
+          $(document).ready(function() {
+              $("#btn_alterar").click(function(){
+              $("#paragrafo_1").css("color","blue")
+              .addClass("estilo1");
+              })});
+        </script>
+    </head>
+    <body>
+        <p id="paragrafo_1">Estilos CSS com jQuery.</p>cadinagfgfdg
+        <button id="btn_alterar">Altera cor de fundo.</button>
+    </body>
+  </html>
+   

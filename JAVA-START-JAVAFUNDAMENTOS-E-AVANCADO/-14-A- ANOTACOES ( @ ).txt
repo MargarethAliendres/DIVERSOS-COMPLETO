@@ -1,0 +1,79 @@
+
+ ANOTAÇOES - QUE PODE CRIAR DENTRO DO JAVA QUE TEM UMA SEMANTICA
+ESPECIFICA COMEÇAM COM @ 
+
+
+
+****PODE UTILIZAR ESSAS INFORMAÇÕES COMPLEMENTARES NO codigo-fonte: 
+ EM TEMPO DE COMPILAÇÃO, CONSTUCAO, EXECUCAO.
+O CÓDIGO-FONTE PODE UTILIZAR ESSAS INFORMAÇÕES PARA 
+compilar O CÓDIGO-FONTE (.CLASS) OU deploy NO CASO DESENVOLVIMENTO WEB (.WAR)
+
+
+****PODE UTILIZAR ESSAS INFORMAÇÕES EM ANOTAÇÕES:
+-documentação, por exemplo, XDoclet.
+-compilação
+-IDE
+-Estrutura de teste, por exemplo, JUnit
+-recipiente Ioc, por exemplo como spring
+-serialização, por exemplo, xml
+-programação orientda a aspectos (OAP), por exemplo, srping AOP
+-servidores de aplicativos, por exemplo, conteiner EJB, servico da web
+-mapeamento objeto relacional (orm), por exemplo, hibernate, jpa
+-e muito mais.
+
+
+
+
+O JAVA.DOC FERRAMENTA DE DOCUMANTAÇÃO USA ALGUMAS ANOTAÇOES.
+
+
+um recurso que permite adicionar informaçãoes complementares no código.
+SOBRESCREVE O METODO.
+
+formas de uso no codigo fonte:
+
+@Override
+@Inherited
+@Deprecated
+@SupressWarni
+
+                                                    //usando deprecated
+
+
+public class DeprectdTeste {
+	
+	public void visusalisar(){
+		System.out.println("visualizar");
+	}
+	
+	@Deprecated          // ele imediatamente risca o metodo exibir, se usar o metodo é por conta em risco
+	public void exibir(){
+		System.out.println("exibir");
+	}
+ 
+}
+
+
+public class TesteAnottation {
+
+	public static void main(String[] args) {
+		
+		DeprectdTeste  tes = new DeprectdTeste();
+           
+		
+		tes.exibir();        // ele executa mas tem a informaçao de deprecado
+		tes.visusalisar();
+	      
+	}
+
+}
+
+
+
+
+
+
+
+
+

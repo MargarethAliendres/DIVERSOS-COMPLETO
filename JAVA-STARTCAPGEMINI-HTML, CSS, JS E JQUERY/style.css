@@ -1,0 +1,61 @@
+h1{
+    color: brown;
+}
+main h1{                                           /*seletor aninhado*/
+    background-color: red;
+    background-image:url(logo.svg) ;
+    background-repeat: repeat;
+    background-position: center;
+}
+h2{
+    color:green;
+    
+}
+p{
+    color:yellowgreen;
+    text-indent: 1rem;
+    text-align: start;
+    letter-spacing: 0.1rem;
+}
+ a:hover{
+    color: rgba(200, 200, 2000, 1);
+    
+    cursor:help;
+
+}
+.titulo-documentos{
+    text-decoration: none;
+}
+.texto-azul{
+    color: blue;
+}
+.texto-vermelho{
+    color: red;
+}
+#titulo-dados-pessoais{
+    text-decoration: none;
+
+}
+#titulo-dados-contrato{
+    color: brown;
+}
+
+.box{
+    box-sizing:content-box;
+    width: 5rem;  
+    height: 5rem;
+    color: white;
+    font-size: 3rem;  
+    padding: 5px 2px 3px 10px; 
+    border: 5px solid rgb(226, 11, 11);          
+}
+
+.azul{
+    background-color: rgba(78, 3, 253, 0.925);
+}
+.vermelho{
+    background-color: rgb(226, 11, 11);
+}
+.verde{
+    background-color: rgba(32, 253, 3, 0.925);
+}

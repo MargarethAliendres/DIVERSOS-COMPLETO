@@ -1,0 +1,153 @@
+
+    EM JAVA  A COLEÇÃO É UM OBJETO               
+
+COLLECTIONS SÃO ESTRUTURA DE DADOS, QUE PERMITE ARMAZENAR
+VÁRIOS OBJETOS;
+
+A COLLECTION É UM OBJETO.
+AS OPERAÇÕES DA COLEÇÕES: ADIÇÃO, REMOÇÃO, ACESSO, PESQUISA DE ELEMENTOS.
+
+ENTRE AS COLLECTIONS TEMOS ALGUMAS CLASSES QUE SAO SUPER OU 
+SEJA TEM CLASSES DERIVADAS(TEM HERANÇA IMPLEMENTADA).
+
+COLLECTION É UM FRAMEWORK, COM VARIOS METODOS. 
+
+NA ESTRUTUTA DA COLLECTION TEM:
+TEM UMA INTERFACE CHAMADA COLLECTION -       LISTA QUE PERMITE MONTAR E TRABALHAR COM ESTRUTURA DE DADOS
+                            TEM O    * LIST(CLASSE MAE)     
+   (INTERNA DO VERTOR)     - ARRAY LIST(CLASSE FILHA)   - NÃO É UM ARRAY , É UMA LISTA QUE TEM A CARACTERISTICA DE POSSIBILITAR  IMPLEMENTAR CARACTERISTA DE ARRAY 
+   (NAS PONTAS)                     - LINKEDLIST(CLASSE FILHA)
+                                                 - VETOR
+
+DIFERENTE DE ARRAY - UM ARRAY VETOR DE OBJETOS OU TIPO PRIMITIVOS QUE PODE TER OBJETOS 
+DENTRO DO VETOR/MATRIZ QUE DEFINE O TAMANHO FIXO NO MOMENTO INICIALIZADO.
+
+   NO ARRAYLIST - NÃO DELIMITA O TAMANHAOCOLOCA NO FIM.
+
+
+
+------------------------------------------------------------------------------------------------------------------------
+
+                 ARRAYLIST - ESPECIALISTA EM PERFORMANCE NA PARTE CENTRAL DO ARRAY
+
+                                                  INSERÇAÕ DECLARANDO DIRETAMENTE
+
+
+import javax.swing.JOptionPane;
+
+public class ArrayListCarros {
+	
+	public static void main(String[] args) {
+        // construindo um arraylist para os carros
+        ArrayList<String> carros = new ArrayList<>();
+        
+        // adicionando Carros ao arraylist        // fica na ordem da inserção, se inserir acima ou abaixo
+        carros.add("KOMBI"); 
+        carros.add("JAGUAR");
+        carros.add("BMW");
+        carros.add("MERCEDES");             
+        carros.add("FUSCA");
+        carros.add("VECTRA");
+        // mostra array
+        System.out.println(carros);
+        
+        // substituir FUSCA por MITSUBISHI          //resgata com base na posição E SUBSTITUI
+        carros.set(4,"MITSUBISHI");
+        // mostra array
+        System.out.println(carros);
+        
+        // remover VECTRA     
+        carros.remove("VECTRA");             //remove com base no conteudo
+        // mostra array
+        System.out.println(carros);
+
+       carros.add("FUSCA2");        //ADICIONANDO SEM INTERAÇÃO, ABAIXO COM INTERAÇÃO
+
+//AO ADICIONAR UM NOVO ITEM ELE FICA SEMPRE NO FINAL DA LISTA, DIFERENTE DO LINKEDLIST QUE DÁ PRA ESCOLHER A POSIÇÃO
+// adicionando Carros ao arraylist com JOPtionPane     // adiciona itens interativamente, 
+        carros.add(JOptionPane.showInputDialog("Informe a marca do carro"));
+        // mostra array
+        System.out.println(carros);
+        
+        // esvaziando o array
+        //carros.clear();
+        // mostra array
+        //System.out.println(carros);
+        
+        
+        // verificar se o array est� vazio
+        if (carros.isEmpty()) {
+            System.out.println("O vetor est� vazio");
+        }
+        
+        if (carros.contains("BMW")) {
+            // substituindo quando n�o se sabe a posi��o
+            for (int i = 0; i < carros.size(); i++) {   // VAI PERCORRER TODA A LISTA
+                if ("BMW".equals(carros.get(i))) {      // VAI BUSCAR UM POR UM E SE FOR IGAUAL A BMW
+                    carros.set(i, "BUGATTI");              // ELE VAI SUBSTITUIR POR BUGATTI
+                    break;                            //PARA PARAR.
+                }
+            }
+         } else {System.out.println("nao achei o argumento pesquisado");
+
+        }
+        // mostra array
+        System.out.println(carros);
+        
+        System.out.println(carros.size());   //verifica o tamanho da lista
+	}
+}
+
+---------------------------------------------------------------------------------------------------------------------------
+                           
+                                              INSERÇÃO INTERATIVA
+
+
+// adicionando Carros ao arraylist com JOPtionPane
+        carros.add(JOptionPane.showInputDialog("Informe a marca do carro"));
+        // mostra array
+        System.out.println(carros);
+
+
+
+
+
+
+**********************************************************************************
+                          LINKEDLIST - ESPECIALISTA NAS EXTREMIDADES
+
+COLOCA NA POSIÇÃO QUE QUISER -  first/last
+
+
+import java.util.LinkedList;
+public class LinkedListCarros {
+
+	    public static void main(String[] args) {
+
+	    String carro;
+	    LinkedList<String> cars = new LinkedList<String>();
+	    cars.add("Volvo");
+	    cars.add("BMW");
+	    cars.add("Ford");
+	    
+	    // incluindo Mazda no inicio
+	    cars.addFirst("Mazda");
+	    System.out.println(cars);
+	    
+	    // Incluindo Bugatti no fim
+	    cars.addLast("Bugatti");
+	    System.out.println(cars);
+	    
+	    carro = cars.get(3);
+	    System.out.println(carro);
+	    
+	    // removendo Mazda
+	    cars.removeFirst();
+	    System.out.println(cars);    
+	    // pega o primeiro
+	    System.out.println(cars.getFirst());
+	    System.out.println(cars);
+	    }
+	    
+}
+        

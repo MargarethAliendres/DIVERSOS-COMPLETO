@@ -1,0 +1,384 @@
+
+
+   GUARDA AS ROTAS, PARA NÃO SEREM ACESSADAS POR PESSOAS NAO 
+AUTORIZADAS.
+
+
+Criando o component pagina-protegida
+
+ng g component pagina-protegida
+
+1° ir na pagina-protegida.componet.html
+
+<p>pagina-protegida works!</p>
+<button> Logout</button> 
+
+
+2º ir na app.component.html acrescentar
+
+<nav>
+  <ul>
+    <li><a routerLink="primeira-pagina"> Primeira pagina</a></li>
+    <li><a routerLink="segunda-pagina"> Segunda pagina</a></li>
+    <li><a routerLink="pagina-protegida"> Pagina protegida</a></li>   //AQUI
+  </ul>
+</nav>     <!-- essa nave antes definida acima do router-outlet deixa esses dois itens fixos em todas as opaginas abertas.-->
+
+<router-outlet>     <!-- quando usa, consegue mostrar os componentes roteados-->
+
+
+</router-outlet>
+
+
+3º  ir no app.routing.module.ts
+
+import { Component, NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';        // importa  tambem a array list Routes//
+import { PrimeiraPaginaComponent } from './primeira-pagina/primeira-pagina.component';   //importa a pagina//
+import { SegundaPaginaComponent } from './segunda-pagina/segunda-pagina.component';   //importa a pagina//
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';//importa a pagina//
+import { PaginaComParametroComponent } from './pagina-com-parametro/pagina-com-parametro.component';//importa a pagina//
+import { PaginaProtegidaComponent } from './pagina-protegida/pagina-protegida.component';
+
+//array list de rotas//
+const routes: Routes = [
+   {path:"primeira-pagina", component: PrimeiraPaginaComponent},
+   {path: "segunda-pagina", component: SegundaPaginaComponent},
+       //no navegador vai aparecer esse caminho//
+   {path: "", redirectTo: "primeira-pagina", pathMatch:"full"},         //quando na url principal nao colocar nenhum caminho esse  /primeira-pagina, ele vai redirecionar automaticamente para a primeira pagina//
+     //no navegador vai aparecer esse caminho//                      // somente quando o caminha estiver vazio, quando tiver especificado dai abre a pagina especificada//
+
+{path: "pagina-protegida", component: PaginaProtegidaComponent},   //roteamento da pagina protegida
+
+     {path:"pagina-com-parametro/:id", component: PaginaComParametroComponent},  //ESSE AQUI COM PARAMETRO
+   //AQUI ESTAMOS PASSANDO O PARAMETRO /:id , podia ser /:nome  e etc..//
+
+     { path: 'lazy-loading', loadChildren: () => import('./lazy-loading/lazy-loading.module').then(m => m.LazyLoadingModule) },   //ESSE É LASY LOADING
+
+
+   {path: "**", component:PaginaNaoEncontradaComponent }
+           //esse asteristico define que qualquer endereço que for digitado que nao está definido a pagina nao existe. dai carrega essa pagina de nao encontrado.   ex /primeira-pagina1
+]
+@NgModule({
+  declarations: [],       //usaremos esse metodo passando as rotas da lista acima//
+  imports: [ RouterModule.forRoot(routes)],
+  exports: [ RouterModule]    // só assim fica disponivel para o app.module.ts usar//
+})
+
+
+export class AppRoutingModule { }
+
+
+
+******************************************************************************
+    // COM OS PROXIMOS PASSOS ABAIXO SOMENTE QUANDO A ´PESSOA TIVER 
+LOGADA ELA TERÁ ACESSO A PAGINA PROTEGIDA.
+
+APÓS TUDO FEITO ACIMA, VAMOS CRIAR O ---- ROUTE GUARDS
+
+ng generate guard auth  - escolha   canActivate
+
+1° ir no app-routing.module.ts, e acrescentar na rota da pagina protegida 
+
+import { Component, NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';        // importa  tambem a array list Routes//
+import { PrimeiraPaginaComponent } from './primeira-pagina/primeira-pagina.component';   //importa a pagina//
+import { SegundaPaginaComponent } from './segunda-pagina/segunda-pagina.component';   //importa a pagina//
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';//importa a pagina//
+import { PaginaComParametroComponent } from './pagina-com-parametro/pagina-com-parametro.component';//importa a pagina//
+import { PaginaProtegidaComponent } from './pagina-protegida/pagina-protegida.component';
+import { AuthGuard } from './auth.guard';
+
+//array list de rotas//
+const routes: Routes = [
+   {path:"primeira-pagina", component: PrimeiraPaginaComponent},
+   {path: "segunda-pagina", component: SegundaPaginaComponent},
+       //no navegador vai aparecer esse caminho//
+   {path: "", redirectTo: "primeira-pagina", pathMatch:"full"},         //quando na url principal nao colocar nenhum caminho esse  /primeira-pagina, ele vai redirecionar automaticamente para a primeira pagina//
+     //no navegador vai aparecer esse caminho//                      // somente quando o caminha estiver vazio, quando tiver especificado dai abre a pagina especificada//
+
+ AQUI -----> {path: "pagina-protegida", component: PaginaProtegidaComponent, canActivate: [AuthGuard] },   //roteamento da pagina protegida
+
+     {path:"pagina-com-parametro/:id", component: PaginaComParametroComponent},  //ESSE AQUI COM PARAMETRO
+   //AQUI ESTAMOS PASSANDO O PARAMETRO /:id , podia ser /:nome  e etc..//
+
+     { path: 'lazy-loading', loadChildren: () => import('./lazy-loading/lazy-loading.module').then(m => m.LazyLoadingModule) },   //ESSE É LASY LOADING
+
+
+   {path: "**", component:PaginaNaoEncontradaComponent }
+           //esse asteristico define que qualquer endereço que for digitado que nao está definido a pagina nao existe. dai carrega essa pagina de nao encontrado.   ex /primeira-pagina1
+]
+@NgModule({
+  declarations: [],       //usaremos esse metodo passando as rotas da lista acima//
+  imports: [ RouterModule.forRoot(routes)],
+  exports: [ RouterModule]    // só assim fica disponivel para o app.module.ts usar//
+})
+
+
+export class AppRoutingModule { }
+
+2° ir no auth.guard.ts                     //INJETEI ESSE GUARD LÁ EM PATH DA PAGINA PROTEGIDA
+
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanActivate {
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    return false;   //deixar AQUI false
+  }
+
+}
+
+veja agora que o link da pagina protegida fica inerte, nao entra nela. NAO FAZ ACESSAR ESSA ROTA.
+
+
+
+3° AGORA CRIAR UM NOVO COMPONENTE DE LOGIN
+
+ng generate component login
+
+
+no      login.componet.html
+
+
+
+<h2> Login</h2>
+<label for="email" > Email</label>
+<input type="text" id="email" [(ngModel)]="email">   <!-- OBS: TEM QUE IR NO APP.MODULE.TS E ACRESCENTAR NO IMPORT formsModule e dar enter para fazer o importe acima tambem.-->
+<label for="senha"> Senha</label>
+<input type="password" id="senha" [(ngModel)]="senha">
+<button (click)="login()"> Entrar</button>
+
+
+
+
+agora vá em       app.routing.module.ts
+
+import { Component, NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';        // importa  tambem a array list Routes//
+import { PrimeiraPaginaComponent } from './primeira-pagina/primeira-pagina.component';   //importa a pagina//
+import { SegundaPaginaComponent } from './segunda-pagina/segunda-pagina.component';   //importa a pagina//
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';//importa a pagina//
+import { PaginaComParametroComponent } from './pagina-com-parametro/pagina-com-parametro.component';//importa a pagina//
+import { PaginaProtegidaComponent } from './pagina-protegida/pagina-protegida.component';
+import { AuthGuard } from './auth.guard';
+import { LoginComponent } from './login/login.component';
+
+//array list de rotas//
+const routes: Routes = [
+   {path:"primeira-pagina", component: PrimeiraPaginaComponent},
+   {path: "segunda-pagina", component: SegundaPaginaComponent},
+       //no navegador vai aparecer esse caminho//
+   {path: "", redirectTo: "primeira-pagina", pathMatch:"full"},         //quando na url principal nao colocar nenhum caminho esse  /primeira-pagina, ele vai redirecionar automaticamente para a primeira pagina//
+     //no navegador vai aparecer esse caminho//                      // somente quando o caminha estiver vazio, quando tiver especificado dai abre a pagina especificada//
+
+  {path: "pagina-protegida", component: PaginaProtegidaComponent, canActivate: [AuthGuard] },   //roteamento da pagina protegida//
+
+  AQUI --------> {path: "login", component: LoginComponent}, // do componente logine
+
+  {path:"pagina-com-parametro/:id", component: PaginaComParametroComponent},  //ESSE AQUI COM //
+   //AQUI ESTAMOS PASSANDO O PARAMETRO /:id , podia ser /:nome  e etc..//
+
+  { path: 'lazy-loading', loadChildren: () => import('./lazy-loading/lazy-loading.module').then(m => m.LazyLoadingModule) },   //ESSE É LASY //
+
+
+  {path: "**", component:PaginaNaoEncontradaComponent }
+           //esse asteristico define que qualquer endereço que for digitado que nao está definido a pagina nao existe. dai carrega essa pagina de nao encontrado.   ex /primeira-pagina1
+]
+@NgModule({
+  declarations: [],       //usaremos esse metodo passando as rotas da lista acima//
+  imports: [ RouterModule.forRoot(routes)],
+  exports: [ RouterModule]    // só assim fica disponivel para o app.module.ts usar//
+})
+
+
+
+AGORA VÁ EM        login.component.ts
+
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent {
+
+email ="";
+senha = "";
+
+
+login(){
+
+
+}
+
+}
+para colocar as propriedades de emal e senha
+
+                     //tem que ter uma função para dizer se está logado ou não.
+AGORA, criar um SERVIÇO de autenticação para trabalhar junto com o GUARD para fazer
+autenticação do usuario.
+
+ng generate service auth  - //será um serviço de autentiação também
+                                       // VAI TER UM METOD QUE VAI DEIZER SE ESTA AUTENTICADO OU NAO
+
+
+dentro do auth.service.ts
+
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+      //cria essa propriedade e copie o token gerado na pagina https://jwt.io/
+acessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
+               //obs: numa aaplicação real, é o backend que retoran esse token
+  constructor() { }
+
+  estaAutenticado(): boolean {       //nesse caso vamos salvar o token no sessionStorage
+
+    return !!sessionStorage.getItem("acess-token");    //o token foi salvo com esse nome //chave padrao que identifica o  usuario
+      //!! converte em booleano       //quando tiver esse token salvo no sessionStaorage - esta autenticado, se nao tiver salvo nao esta autenticado
+  }
+
+       //salva no browser (dá f12 aplicação(lá tem varios lugares de armazenasr - mesmo desligndo o computador, ou fechando a aba manter usuario logado quando voltar nao precisa logar - localStorage
+  login(email: string, senha: string):boolean{                                   //- matem logado somente naquela sessao, quando voltar tem que logar -  SessionStorage
+     if(email === "admin@admin.com.br" && senha === "123456"){    /*na hora de logar estiver exatamente esses dados salve no session storage esse token*/
+         sessionStorage.setItem("acess-token", this.acessToken);     //seta o acess token no   sessionStorage                                                     
+       return true;
+     }
+
+     return false;
+  }                                         //a forma que identifica o usuario é atravez de um token - JWT site https://jwt.io/  o token QUE 
+                                             //É ARMAZENADO NO localStorage   ou sessionStorage 
+           
+  logout(){
+    sessionStorage.clear();
+
+  }
+}
+
+
+
+Ir agora em login.component.ts
+
+
+import { Component } from '@angular/core';
+import { Route, Router } from '@angular/router';
+import { AuthService } from '../auth.service';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent {
+
+email ="";
+senha = "";
+
+constructor(
+  private auth: AuthService,   //buscao serviço de login injetando esse serviço aqui//
+  private router: Router      // para fazer direcionamento faz injeção do Router//
+
+  ){}
+
+
+login(){                                             //se foi logado//
+  if( this.auth.login(this.email,this.senha)){   //se essa autenticaçao for verdadeira, me leve para a pagina protegida//
+    this.router.navigate(["pagina-protegida"]);
+    return;   // nao mostra o alerta que vai ser colocado abaixo//
+   }
+
+   alert ("O Login está invalido");   //se nao foi logado//
+  this.senha="";    //limpa a senha e login//
+  this.email="";
+
+  }
+}
+
+
+DEPOIS DE TUDO ISSO, VOLTE NO auth.guard.ts  e configure 
+
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
+import { LoginComponent } from './login/login.component';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthGuard implements CanActivate {
+
+  constructor(private auth:  AuthService,   //qui tem que injetar o serviço de autenticação,  pois se foi autenticado, o guard liberara o acesso  //na pagina protegida////
+              private router: Router){      // aqui injeta o roteamento para usasr abaixo
+
+  }
+
+  canActivate(      //esse canActivate foi colocado no path da (pagina-protegida) no app.routing.module.ts//
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    if(!this.auth.estaAutenticado()){    //! significa se ele nao estiver autenticado, o acesso a pagina-protegida encaminhará para a tela de login //
+       this.router.navigate(["Login"]);   
+    
+      return false;
+
+    }
+    return true;    // se foi autenticado entra na pagina protegida
+  }
+
+}
+
+
+AGORE ENTRE NO componente pagina-protegida.html
+
+<p>pagina-protegida works!</p>
+<button (click)="logout()"> Logout</button>
+
+
+
+Agore entre no pagina-protegida.ts
+
+
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
+
+@Component({
+  selector: 'app-pagina-protegida',
+  templateUrl: './pagina-protegida.component.html',
+  styleUrls: ['./pagina-protegida.component.css']
+})
+export class PaginaProtegidaComponent {
+
+   constructor(private auth: AuthService,       // vai injetar o serviço de autenticação, para fazer a limnpeza//
+               private router: Router ){         //injetar para fazer rotemento abaixo//
+   }
+
+  logout(){
+    this.auth.logout();  //isso vai limpar o sessionStorage//
+    this.router.navigate([""]); //será redirecionado para a pagina principal//
+
+
+  }
+
+}
+
+PRONTO TUDO CONCLUIDO.
+
+
+
+
+
+
+

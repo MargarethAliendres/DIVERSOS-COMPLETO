@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+  <html lang="pt-BR">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+     <title>Exemplo CSS jQuery</title>
+      <script type="text/javascript" src="jquery/jquery-2.1.3.min.js"></script>
+     <style rel="stylesheet" type="text/css">
+       .estilo1{
+            background-color: lightgreen;
+            border: 1px solid;
+        }
+      </style>
+        <script type="text/javascript">
+          $(document).ready(function() {
+              $("#btn_alterar").click(function(){
+              $("#paragrafo_1").css("color","blue")
+              .addClass("estilo1");
+              })});
+        </script>
+    </head>
+    <body>
+        <p id="paragrafo_1">Estilos CSS com jQuery.</p>
+        <button id="btn_alterar">Altera cor de fundo.</button>
+  
+           
+        <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+        <script src="bootstrap3.3.7/js/bootstrap.min.js"></script>
+    </body>
+  </html>

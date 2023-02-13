@@ -1,0 +1,149 @@
+
+
+ROTEAMENTO ENTRE PAGINAS.
+
+criando um novo projeto
+
+ng new roteamento -( colocar na instalação (n) para routing)
+
+após instalar a biblioteca - npm i @angular/router   (instalar a biblioteca)
+                                                                                                                                // com esse comando(--flat ) o modulo de roteamento será gerado dentro da passta app.
+criar o modulo responsavel por fazer esse roteamento - ng generate module app-routing --flat --module=app
+                                                                                                                                               //com esse comando ( --module=app) sera criado dentro de app.modules.ts no import automaticamente
+apos criado, entre no arquivo e delete:
+
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';  -delete
+
+@NgModule({
+  declarations: [],
+  imports: [
+    CommonModule  - delete
+  ]
+})
+export class AppRoutingModule { }
+
+
+                           
+o arquivo  app-routing.module.ts  acima deve ficar assim:
+  
+                  //crie os componentes após ou antes e insira no roteador
+
+import { Component, NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';        // importa  tambem a array list Routes//
+import { PrimeiraPaginaComponent } from './primeira-pagina/primeira-pagina.component';   //importa a pagina//
+import { SegundaPaginaComponent } from './segunda-pagina/segunda-pagina.component';   //importa a pagina//
+
+//array list de rotas//
+const routes: Routes = [
+   {path:"primeira-pagina", component: PrimeiraPaginaComponent},
+   {path: "segunda-pagina", component: SegundaPaginaComponent},
+           //no navegador vai aparecer esse caminho//
+   {path: "", redirectTo: "primeira-pagina", pathMatch:"full"},         //quando na url principal nao colocar nenhum caminho esse  /primeira-pagina, ele vai redirecionar automaticamente para a primeira pagina//
+     //no navegador vai aparecer esse caminho//                      // somente quando o caminha estiver vazio, quando tiver especificado dai abre a pagina especificada//
+
+     {path: "**", component:PaginaNaoEncontradaComponent },
+           //esse asteristico define que qualquer endereço que for digitado que nao está definido a pagina nao existe. dai carrega essa pagina de nao encontrado.   ex /primeira-pagina1
+]
+
+@NgModule({
+  declarations: [],       //usaremos esse metodo passando as rotas da lista acima//
+  imports: [ RouterModule.forRoot(routes)],
+  exports: [ RouterModule]    // só assim fica disponivel para o app.module.ts usar
+})
+
+
+  esses componentes que foram inseridos no roteador:
+
+       primeira-pagina-component.ts
+ 
+import { Component } from '@angular/core';
+import { Router} from '@angular/router'
+                         //para a constante router funcionar deve importar desse jeito//
+
+@ Component({
+  selector: 'app-primeira-pagina',
+  templateUrl: './primeira-pagina.component.html',
+  styleUrls: ['./primeira-pagina.component.css']
+})
+export class PrimeiraPaginaComponent {
+
+  constructor(                           //com esse construtor pronto, podemos inserir o metodo abaixo.///
+   private router: Router                 //do botao que esta na primeira pagina redirecionar para a segunda pagina//
+  ){ }
+
+  moverParaSegudaPagina(){
+   this.router.navigate(["segunda-pagina"]);
+  }
+
+}
+
+primeira-pagina-component.html
+
+<p>Primeira-pagina Senhor e Salvador Jesus Cristo te amooooo</p>
+<button type="button"(click)="moverParaSegudaPagina()">Ir para segunda pagina</button>
+
+
+
+segunda-pagina-component.ts 
+
+import { Component } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+@Component({
+  selector: 'app-segunda-pagina',
+  templateUrl: './segunda-pagina.component.html',
+  styleUrls: ['./segunda-pagina.component.css']
+})
+export class SegundaPaginaComponent {
+
+}
+
+import { Component } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+@Component({
+  selector: 'app-segunda-pagina',
+  templateUrl: './segunda-pagina.component.html',
+  styleUrls: ['./segunda-pagina.component.css']
+})
+export class SegundaPaginaComponent {
+
+}
+
+segunda-pagina-component.html
+<p>Segunda pagina, aleluia, gloria a Deus altissimo.... Te amoooooooo Deus amado Jesus Cristo</p>
+
+
+
+agora crie  o componente da pagina-nao-encontrada
+
+
+pagina-nao-encontrada.compontent.ts
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-pagina-nao-encontrada',
+  templateUrl: './pagina-nao-encontrada.component.html',
+  styleUrls: ['./pagina-nao-encontrada.component.css']
+})
+export class PaginaNaoEncontradaComponent {
+
+}
+
+
+agora coloque na pagina-nao-encontrada.component.html
+
+<p>404! | pagina nao encontrada</p>
+
+
+
+agora acrescente do app-routing.module.ts    conforme já coloquei.
+
+
+
+
+
+
+

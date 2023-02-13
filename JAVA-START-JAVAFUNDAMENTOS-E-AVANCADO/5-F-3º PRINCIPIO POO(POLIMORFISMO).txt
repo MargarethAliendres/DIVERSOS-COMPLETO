@@ -1,0 +1,73 @@
+
+     
+     USA Herança e sobrescrita de métodos
+
+
+* ALGUMA COISA ASSUME MULTIPLAS FORMAS 
+
+O METODO DA CLASSE MAE-PRINCIPAL-MAIN-SUPERCLASSE  É  REAPROVEITADA
+ EM OUTRAS CLASSES COM ENTONAÇAO DIFERENTE, ou seja * o memso metodo retorna dois valores diferente.
+
+diferença:
+           //aqui é diferentea na criacao do objeto, Mamifero tras infomação de elefante e rato
+		Mamifero mamifero1 = new Elefante();
+                                Mamifero mamifero1 = new Elefante();
+   
+
+* QUANDO CRIA UMA CLASSE ABSTRATA NAÕ PODE CRIAR UMA INSTANCIA 
+OU OBJETO DELA, por isso quanda faz a instancia é diferente.
+* o memso metodo retorna dois valores diferente.
+
+nesse caso a classe mamifero é abstrata
+
+Crias as classes:
+
+abstract class Mamifero {
+
+	public abstract double cotaDiariaLeite();
+
+
+}
+
+public class Elefante extends Mamifero {                          //classe elefante
+	
+	public double cotaDiariaLeite() {
+		return 30.0;
+	}
+
+}
+
+
+public class Rato extends Mamifero{                             //classe rato
+
+		public double cotaDiariaLeite() {
+			return 0.5;
+		}
+}
+
+
+
+
+
+
+
+
+public class Polimorfismo {                                                  //classe principal
+
+	public static void main(String[] args) {
+	                                                           //aqui é diferentea criacao do objeto, Mamifero tras infomação de elefante e rato
+		Mamifero mamifero1 = new Elefante();
+		System.out.println("Cota di�ria de leite de um Elefante :" + mamifero1.cotaDiariaLeite());
+
+		Mamifero mamifero2 = new Rato();
+		System.out.println("Cota di�ria de leite de um Rato :" + mamifero2.cotaDiariaLeite());
+	}
+
+}
+
+
+
+
+
+
+

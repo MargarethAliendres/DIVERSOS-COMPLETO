@@ -1,0 +1,271 @@
+
+   OBS: PODE CRIAR DE FOMAR MANUAL COMPONENTES, ESTÁ O PASSO A PASSO 
+NA PASTA ROSA DE MATERIAL DE ESTUDO ANGULAR.
+
+TEM O SITE DO ANGULAR DA DOCUMENTACAO.
+
+         AQUI SERÁ CRIADO A PASTA E O ARQUIVO DO COMPONENTE VIA CMD TUDO DE UMA VEZ, DIFERENTE DO MANUAL.
+
+1- DENTRO DA PASTA DO PROJETO EX fundamento-angular  NO CMD DIGITAR 
+
+(ng generate component segundo-componente)(este ultimoe o nome da componente que ira ser criado).
+
+2- TUDO ESTÁ CRIADO, SOMENTE PRECISA MANUALMENTE IR NO app.component.html
+E COLOCAR <app-segundo-componente></app-segundo-componente>
+
+
+INCIANDO OS TRABALHOS:
+DENTRO DO HTML, DESTE COMPONENTE QUE ACABOU DE SER CRIADO VAMOS APRENDER
+
+*INTERPOLAR DADOS, 
+<!-- interpolação de dados 
+(criar as variariaves na classe do arquivo segundo-componente.componet ts) 
+
+export class SegundoComponenteComponent {
+nome = "margareth clarinda carvalho aliendres";
+datadenascimento ="1983-02-23";
+
+e chama aqui no html (segundo-componente.component.html-->
+       <!-- use o pipe e coloca uppercase deixa tudo maiusculo,  na data foi colocado a data contraria lá no segundo-componente.componet ts  dai usou o pipe para colocar nessa ordem-->
+<p> Nome: {{nome | uppercase}}</p>        
+<p> Data de nascimento: {{datadenascimento | date: "dd/MM/yyyy"}}</p>   // NA DOCUMENTAÇÃO DO ANGULAR TEM OS FORMATOS//
+
+-----------------------------------------------
+*  BIDING
+
+
+   1- Property Binding (vinculação de propriedade)
+(neste ex anexe a imagem na classe do arquivo segundo-componente.componet ts) 
+
+     export class SegundoComponenteComponent {
+     nome = "margareth clarinda carvalho aliendres";
+     datadenascimento ="1983-02-23";
+    urlImagem = "/assets/laptop-1.jpg";   (ESSA IMAGEM)       // COLOCA AS IMAGENS DENTRO DE ASSENTS DA APLICAÇÃO//
+}
+e chama aqui no html (segundo-componente.component.html-->
+    <img [src]="urlImagem" width="100">  <br>   //PARA FAZER O PROPERTY BINDING TEM QUE COLOCAR O ATRIBUTO ENTRE COLCHETES
+      
+  *************
+
+   2- Event Binding (vinculação de evento)   // DISPARA UM METODO A PARTIR DE UM EVENTO DE CLIQUE
+(neste ex crire o metodo na classe do arquivo segundo-componente.componet ts) 
+     export class SegundoComponenteComponent {
+             nome = "margareth clarinda carvalho aliendres";
+             datadenascimento ="1983-02-23";
+              urlImagem = "/assets/laptop-1.jpg";
+
+              mostrarDataNascimento(){                                       (ESSE METODO)
+                 alert(`A data de nascimento de Margareth é: ${this.datadenascimento}`);
+} 
+}
+e chama aqui no html (segundo-componente.component.html-->
+           //COLOCA O BIDING EVENT DENTRO DO PARENTESES
+<button (click)="mostrarDataNascimento()" type="button"> Mostrar data de nascimento </button>
+
+ *****************
+                                       //USADO PARA PREENCIMENTO DE FORMULARIO
+   3- too-way-data-binding (vinculação de dados DE DUAS VIAS do componente para o template e do template para o componente ) USADO EM FORMULARIO
+
+ (neste ex crie o metodo na classe do arquivo too-way-data-binding.componet ts) 
+
+export class SegundoComponenteComponent {
+
+  nome = "";   //  essa variavel vai começar vazia  // mas tambem pode colocar valor nela
+
+}
+      e chama aqui no html (too-way-data-binding.component.html-->
+
+<h1>Too way data binding!</h1>
+
+<label for="nome"> Digite seu nome:</label>
+<input type="text" [(ngModel)]="nome">       //O BAIDING TOO WAY COLOCAR DENTRO DO COLCHETE E PARENTESES
+<p>Nome digitado:{{nome}}</p>
+
+
+OBS: 
+<!-- é usado quando está preenchendo um formulário-->
+<!--
+  ir no app.module.ts, no import e adicionar esse formsModule, para o  Too way data binding funcionar no input
+imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule
+],
+
+--------------------------------------------------------------------------------------------------------------
+*RENDENRIZANDO LISTAS
+
+primeiro cria uma pasta types, na pasta app principal (clica em app - acima pastinha de criar pasta) - logo após dentro desta pasta crie um arquivo
+ apos -clique na pasta criada lado direito mouse- new file - e colocque o nome do arquivo assim Celular.ts (tudo feito manualmente) e após defina:
+
+dentro do arquivo criado coloque esses 
+
+export interface Celular{
+  id:number;
+  nome:string;
+  descricao?:string;        //esse sinal de interrogação deixa o preenchimento opcional//
+  esgotado:boolean;
+}
+
+ criou um novo componete 
+
+(crie o metodo na classe do arquivo ex: redenrizando-listas.componet ts) 
+
+export class RenderizandoListasComponent {
+  celulares: Celular[] = [
+    { id: 1, nome: "Celular XL", descricao: "celular grande", esgotado: false},
+    { id: 2, nome: "Celular uXL", descricao: "celular pequeno", esgotado: true},
+    { id: 3, nome: "Celular oXL", descricao: "celular medio", esgotado: false},
+
+  ]
+}
+
+e chama aqui no html (renderizando-listas.component.html-->
+
+<h2>Renderizando lista de dados</h2>
+
+<ul class="lista-produtos">
+  <li *ngFor="let celular of celulares">
+     <strong>{{celular.nome}} </strong>
+     <p> {{celular.descricao}} </p>                                    //E ESSE ESGOTADO É A PROPRIEDADE DA CLASSE 
+     <span [ngClass]="celular.esgotado ? 'esgotado' : '' "> {{celular.esgotado ? "esgotado" : "disponivel"}} </span>
+          <!-- esse comando deixa o esgotado preto-->      <!-- é o if else (? "esgotado" : "disponivel")-->
+             <!-- atrelou um properties biding acimas-->
+        </li>     OBS. ESSE .ESGOTADO É A CLASSE CRIADA NO CSS COM COR PRETA
+
+</ul>
+
+
+tambem dentro do css desse componente criaado coloque essas configurações
+
+.lista-produtos {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.lista-produtos strong {
+  display: block;
+}
+
+.lista-produtos span {
+  display: inline-block;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: green;
+  color: white;
+}
+
+.lista-produtos .esgotado {
+  background-color: black;
+}
+
+
+
+
+e sempre, no app.compont.html tem que lincar esse componente que acamos de criar
+<app-renderizando-listas></app-renderizando-listas>
+
+------------------------------------------------------------------------------------------------------------------
+                                    //DECORADOR DE INPUT PARA MUDAR O VALOR DA PROPRIEDADE
+                                                              PARA MUDAR DIFERENTES NOMES E SOBRENOMES
+* COMPONETE PERSONALIZADO                      INPUT
+(crie o metodo na classe do arquivo ex: componente-personalizado.componet.ts) 
+
+export class ComponentePersonalizadoComponent {
+  
+  //IMPORTA DO ANGULAR COR
+  @Input() nome = "";
+  @Input() sobrenome = "";
+              //PROPRIEDADES COM STRING VAZIAS
+
+}
+
+e chama aqui no html (componente-personalizado.component.html-->
+
+<p>{{nome}} {{sobrenome}}</p>
+
+
+tambem dentro do css desse componente criado coloque essas configurações
+
+p{
+
+  color: blueviolet;
+  font: 3rem;
+
+}
+
+
+e sempre, no app.compont.html tem que lincar esse componente que acamos de criar
+ESSE TEM UMA DIFERENÇA
+
+<app-componente-personalizado nome = "Priscilla" sobrenome = "da silva"></app-componente-personalizado>
+<app-componente-personalizado nome = "JOAO" sobrenome = "da silva"></app-componente-personalizado>
+<app-componente-personalizado nome = "val" sobrenome = "carvalho"></app-componente-personalizado>
+10:41 20/01/2023
+e ainda, pode ir dando ctrl c e colando varios e modificando o nome e manter a assinatura, ou mudar a assinatura.
+
+------------------------------------------------------------------------------------------------------------------------
+                        //COMUNICAÇÃO ENTRE OS ELEMENTOS
+
+*INTERAÇÃO ENTRE COMPONENTE PAI E FILHO - PAI PARO O FILHO PASSANDO PROPRIEADE E FUNÇÕES 
+QUE O ELEMENTO FILHO VAI EXECUTAR.  IDEM E DO FILHO PARA O PAI.
+
+         USADOS NO INPUT E OUTPUT
+
+1º cria o componente pai e o componente filho
+
+no componente pai          ( (crie o metodo na classe do arquivo componente-pai.componet.ts) 
+
+
+export class ComponentePaiComponent {
+
+  sobrenome = "da silva"     1° PAI
+
+  mostrarNomeCompleto(nomeCompleto:any){           //comando do output que sera vinculado ao filho//
+    alert(`o nome completo é: ${nomeCompleto}`);
+
+}
+}
+
+no componente filho         ( (crie o metodo na classe do arquivo componente-filho.componet.ts)
+
+
+export class ComponenteFilhoComponent {
+  @Input() sobrenome = "";                //faz parte do comando pai para filho input//  3°
+  @Output() mostrarNome = new EventEmitter();     //faz parte do comando output//
+
+  nome = "";  //faz parte do comando pai para filho input// 3º pai/filho
+
+}
+
+
+
+e chama aqui no html (componente-pai.component.html-->
+
+<h2>interação entre componentes</h2>      2°  pai/filho
+<h3> o sobrenome está definidio no elemento pai:{{sobrenome}}</h3>2°  pai/filho
+<h3> o nome completo é: {{filho.nome}} {{sobrenome}} </h3>   <!-- esse comando tras do filho para o pai com o acrescentamento abaix de #filho-->      filho/pai
+<app-componente-filho [sobrenome]="sobrenome"  #filho       (mostrarNome)="mostrarNomeCompleto($event)" ></app-componente-filho>    <3° comando mostartr nome output
+      <1° comando do pai para filho                      <!--2º ( esse comando  #filho -cria uma variavel de template do componente filho )comando leva do filho para o pai-->  <!--3º comando do output-->
+
+e chama aqui no html (componente-filho.component.html-->
+
+<h3> o sobrenome veio do elemento pai:{{sobrenome}}</h3>  4° pai/filho
+<label for="nome">Digite o nome:</label> 4° pai/filho
+<input type="text" id="nome" [(ngModel)] = "nome"> <br>4° pai/filho
+<!-- faz parte do comando input-->
+
+<button type="button" (click)="mostrarNome.emit(nome +' '+sobrenome )"> Mostrar nome completo</button>
+  <!-- faz parte do comando output>-->
+
+
+e sempre, no app.compont.html tem que lincar esse componente que acamos de criar
+ESSE TEM UMA DIFERENÇA, linca somente o pai, pois o filho já está dentro do pai.
+<app-componente-pai></app-componente-pai>
+
+--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+

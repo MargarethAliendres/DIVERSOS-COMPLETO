@@ -1,0 +1,75 @@
+               //quando tem funções que podem repetir, cria serviços          
+
+*SERVIÇOS  -  FUNCIONALIDADE QUE PODEM SER USADAS EM DIVERSOS COMPONENTES
+
+  1º crie um componente  (ng generate service logger)
+
+(dentro de logger.service.ts faça os métodos)
+
+export class LoggerService {
+
+  mensagens: string[] = [];
+
+  logar(mensagem:string){
+    console.log(mensagem);
+    this.mensagens.push(mensagem);      //será colocado todas as mensagem na lista de mensagens
+  }
+
+  exibirTodosLogs(){
+     console.log(this.mensagens);
+  }
+
+}
+
+(Em seguida usar esse serviço/metodos nos componentes ir no componente serviço1 já criado
+e INJETAR esse serviço)
+
+1° ir no exemplo-servicos1.component.ts   / FOI USADO NESTE COMPONENTE, FUNCIONOU
+
+usar o método Construtor 
+
+export class ExemploServicos1Component {
+   nome ="";
+                                                                       //PARA ACRESCENTAR SERVIÇO DENTRO DO COMPONENTE DE LOGGER SERVICES PRECISA DO CONSTRUTOR
+   constructor(private logger: LoggerService){    //acrescentei ex service//
+   // injetou o loggerService agora consegue usara as classe do service com seus metodos abaixo_)
+   }
+
+   adicionarNome(){
+    this.logger.logar(`o nome ${this.nome} foi adicionado`);     // aqui tras o metodo do service//
+   }
+
+
+no exemplo-servicos2.component.html  naõ alterei nada.
+
+
+  2° ir no exemplo-servicos2.component.ts  / FOI USADO NESTE COMPONENTE, FUNCIONOU
+
+usar o método Construtor 
+
+  export class ExemploServicos2Component {
+
+    descricao = "";
+
+    constructor(public logger:LoggerService){}    //acrescentei ex service//
+   // injetou o loggerService agora consegue usara as classe do service com seus metodos abaixo_)
+
+  adicionarProduto(){
+    this.logger.logar( `o nome do produto ${this.descricao} foi adicionado`);  // aqui tras o metodo do service//
+
+  }
+
+}
+
+aqui teve um diferencial adicioneu im botao no exemplo-servicos2.component.html  paraa exibir todos os logs
+
+<p>Serviço 02</p>
+<label for="descricao">Digite o nome do produto:</label>
+<input type="text" [(ngModel)] = "descricao">
+<button type="button" (click)="adicionarProduto()"> Adicionar produto</button>
+<button type="button" (click)="this.logger.exibirTodosLogs()"> exibir todos os logs</button>
+
+ 
+
+
+

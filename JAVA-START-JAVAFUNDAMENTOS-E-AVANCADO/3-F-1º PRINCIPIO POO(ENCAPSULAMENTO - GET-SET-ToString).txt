@@ -1,0 +1,69 @@
+
+* UM DOS PILARES DO POO  ENCAPSULAMENTO- BLINDA OS ATRIBUTOS QUE ESTAO DENTRA DAS 
+CLASSES.
+
+ENCAPSULAMENTO - É O GET(PEGA INFORMACAO) E O SET (MANDA INFORMACAO PARA DENTRO
+DA CLASSE  
+
+CTRL+3
+
+public class Principal {                         // classe Principal       main
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Pessoa pess = new Pessoa();
+		pess.setNomePessoa("margareth Aliendres");
+		pess.setIdadePessoa(30);
+	    System.out.println(pess.toString());
+	}
+
+}
+                                                     //classe Pessoa
+
+
+import javax.swing.JOptionPane;
+
+public class Pessoa {
+	
+     
+     private String nomePessoa;
+     private int idadePessoa;
+    
+     
+     
+ 	// ctrl+3//
+     
+     public String getNomePessoa() {
+		return nomePessoa;
+	}
+
+
+
+	public void setNomePessoa(String nomePessoa) {
+		this.nomePessoa = nomePessoa;
+	}
+
+
+
+	public int getIdadePessoa() {
+		return idadePessoa;
+	}
+
+
+
+	public void setIdadePessoa(int idadePessoa) {
+		this.idadePessoa = idadePessoa;
+	}
+
+	// ctrl+3//
+	
+             /*serve para imprimir o valor da variavel que esta na 
+	classe principal*/
+
+	@Override
+	public String toString() {
+		return "Pessoa [nomePessoa=" + nomePessoa + ", idadePessoa=" + idadePessoa + "]";
+	}
+
+}

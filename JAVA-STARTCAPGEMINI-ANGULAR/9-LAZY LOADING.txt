@@ -1,0 +1,57 @@
+
+  QUANDO ABRIR A PAGINA, NAO VAI SER CARREGADO TODOS OS ARQUIVOS, SOMENTE
+QUANDO ACIONADOS QUE VAI CARREGADO CONFORME A NECESSIDADE.
+
+                                         
+ng g module lazy-loading --route=lazy-loading --module=app
+
+esse comando abrirá uma pasta lazy-loading
+
+
+aqui nao mechemos em pasta nenhuma, so abrimos o navegador e cliquei f12 e rede/network  
+dai dá f5   http://localhost:4200/lazy-loading,  toda hora a pagina vai carregar o componente, aqui carrega quando vai usar.
+http://localhost:4200/segunda-pagina comparando com essa pagina essa nao carrega mais nas
+proximas clicadas, pois ja carregou todo o conteudo.
+
+para ver que carregaria somente os itens da pagina que abri, nada mais.
+
+dentro conterá os arquivos:
+
+azy-loading-routing.module.ts
+azy-loading.component.css
+azy-loading.component.html
+azy-loading.component.spec.ts
+azy-loading.component.ts
+lazy-loading.module.ts
+
+e ainda, se inserirá no roteamento geral alltomaticamente 
+
+import { Component, NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';        // importa  tambem a array list Routes//
+import { PrimeiraPaginaComponent } from './primeira-pagina/primeira-pagina.component';   //importa a pagina//
+import { SegundaPaginaComponent } from './segunda-pagina/segunda-pagina.component';   //importa a pagina//
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada/pagina-nao-encontrada.component';//importa a pagina//
+import { PaginaComParametroComponent } from './pagina-com-parametro/pagina-com-parametro.component';//importa a pagina//
+
+//array list de rotas//
+const routes: Routes = [
+   {path:"primeira-pagina", component: PrimeiraPaginaComponent},
+   {path: "segunda-pagina", component: SegundaPaginaComponent},
+       //no navegador vai aparecer esse caminho//
+   {path: "", redirectTo: "primeira-pagina", pathMatch:"full"},         //quando na url principal nao colocar nenhum caminho esse  /primeira-pagina, ele vai redirecionar automaticamente para a primeira pagina//
+     //no navegador vai aparecer esse caminho//                      // somente quando o caminha estiver vazio, quando tiver especificado dai abre a pagina especificada//
+
+     {path:"pagina-com-parametro/:id", component: PaginaComParametroComponent},  //ESSE AQUI COM PARAMETRO
+   //AQUI ESTAMOS PASSANDO O PARAMETRO /:id , podia ser /:nome  e etc..//
+
+  aqui-->   { path: 'lazy-loading', loadChildren: () => import('./lazy-loading/lazy-loading.module').then(m => m.LazyLoadingModule) },   //ESSE É LASY LOADING
+
+
+   {path: "**", component:PaginaNaoEncontradaComponent }
+           //esse asteristico define que qualquer endereço que for digitado que nao está definido a pagina nao existe. dai carrega essa pagina de nao encontrado.   ex /primeira-pagina1
+]
+@NgModule({
+  declarations: [],       //usaremos esse metodo passando as rotas da lista acima//
+  imports: [ RouterModule.forRoot(routes)],
+  exports: [ RouterModule]    // só assim fica disponivel para o app.module.ts usar//
+})

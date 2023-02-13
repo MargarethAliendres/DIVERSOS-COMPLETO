@@ -1,0 +1,22 @@
+﻿<htm>
+
+<head>
+ <title> criacao de tabela
+  </title>
+</head>
+
+ <body>
+     
+    <table>
+
+     <TR>
+        <TD> NOME </TD>
+        <TD> ENDERECO </TD>
+        <TD> IDADE </TD>
+     <TR>
+         <TD> SEXO </TD>
+         <TD> PAIS </TD>
+      </TR>
+    </table>
+</body>
+</html>

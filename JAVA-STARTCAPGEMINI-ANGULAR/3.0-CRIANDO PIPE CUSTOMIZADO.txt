@@ -1,0 +1,37 @@
+
+
+      CRIAR MANEIRAS DE COMO QUEREMOS QUE ALGO APAREÇA NA TELA.
+
+NO CMD:  ng genarate pipe multiplica-por  esse comando cria o arquivo ts abaixo. 
+somente preencher os campos da classe 
+
+
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'multiplicaPor'
+})
+export class MultiplicaPorPipe implements PipeTransform {
+
+  transform(valor: number, multiplicador : number): unknown {     //pode passar diversos argumentos para o pipe//
+    return valor * multiplicador;
+  }
+
+}
+
+
+após chama ele nos compontes criados cou crie um novo componente .
+
+
+       (primeiro numero multiplica pelo segundo), passa quantos valores quiser, 
+<p>{{2 | multiplicaPor:8 }}</p>
+<p>{{2 | multiplicaPor:7 }}</p>
+<p>{{2 | multiplicaPor:4 }}</p>
+<p>{{2 | multiplicaPor:5 }}</p>
+<p>{{2 | multiplicaPor:8 }}</p>
+<p>{{2 | multiplicaPor:9 }}</p>
+
+
+
+

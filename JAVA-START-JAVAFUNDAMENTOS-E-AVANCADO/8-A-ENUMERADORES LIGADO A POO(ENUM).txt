@@ -1,0 +1,73 @@
+
+** quando precisar de alguma coisa que não precisa guardar no banco de dados, usa enum.
+
+
+package Construtores;
+
+import Construtores.Aluno.MATRICULA;
+import Construtores.Aluno.STATUS;
+public class Construtor {
+
+	public static void main(String[] args) {
+		// passando os dados atrav�s do construtor com sobrecarga
+		Aluno alu = new Aluno( 8,  8,  8);
+		// calculando a m�dia
+		double mediaAlunoFinal = alu.calcularMediaAluno();
+		
+		// definindo situa��o do aluno
+		if (mediaAlunoFinal < 6 ) {
+//enum 		     alu.situacaoAluno = STATUS.REPROVADO;
+criado na classe 	} else {
+aluno		    alu.situacaoAluno = STATUS.APROVADO;
+		}
+		
+		// imprimindo situa��o do aluno
+		System.out.println("A m�dia do aluno � : " + alu.calcularMediaAluno() + " e o aluno est� " + alu.situacaoAluno);
+	
+//novo enum	alu.situacaoMatricula = MATRICULA.PENDENTE;
+criado na classe         System.out.println("situacao matricula: " + alu.situacaoMatricula);
+aluno	
+	}
+
+                            
+                                                                              //classe enum
+package Construtores;
+
+public class Aluno {
+	private double nota1;
+	private double nota2;
+	private double nota3;
+enum	STATUS situacaoAluno;
+enum 	MATRICULA situacaoMatricula;	
+	
+                        public Aluno(double nota1, double nota2, double nota3) {
+		super();
+		this.nota1 = nota1;
+		this.nota2 = nota2;
+		this.nota3 = nota3;
+	}
+
+                                                                     
+               // DEFININDO UM ENUMERADOR
+criando	public enum MATRICULA{
+enum	   MATRICULADO,
+	   PENDENTE,
+	   RECUSADA
+	  
+}
+	// DEFININDO UM ENUMERADOR
+	
+criando       public enum STATUS {
+enum 	 APROVADO,
+	 REPROVADO
+	}
+
+	// M�todo para calcular m�dia do aluno
+	public double calcularMediaAluno() {
+		double mediaAluno = 0;
+		// c�lculo da media
+		mediaAluno = (this.nota1 + this.nota2 + this.nota3) / 3;
+		return mediaAluno;
+	}
+}
+	

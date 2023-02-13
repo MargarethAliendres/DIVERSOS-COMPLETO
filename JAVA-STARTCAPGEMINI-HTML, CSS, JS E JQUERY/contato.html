@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<br lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+     div{
+
+        width: 10rem;
+        height: 8rem;
+        background-color: rgb(38, 230, 20);
+     }
+    </style>
+    <title>Contato</title>
+</head>
+<br>
+   <form method="get" action="contato.html"> <br/>      <!-- action="index.html"-->     <!-- conteudo sensivel tipo login POST VAI NO CORPO NAO FICA EXPOSTO NA URL JÁ OUTROS PELO GET QUE NÃO TEM CORPO FICA EXPOXTO NA URL-->
+    <input type="text" name="nome" placeholder="Nome"/> <br/>                            <!-- name="none"-->
+    <input type="email" name="email" placeholder="E-mail"/> <br/>  
+    <input type="search" name="nome" placeholder="Nome"/> <br/>  
+    <input type="tel" name="tel" placeholder="(xx)xxxx-xxxx)"/> <br/>  
+    <input type="number" name="idade" placeholder="Idade"/> <br/> 
+    <input type="date" name="data" placeholder="Data"/> <br/> 
+    <input type="url" name="linkedin" placeholder="Linkedin"/> <br/> 
+    Urgencia <input type="range" name="urgencia" min=0 max=100 step="0.1"/> <br/> 
+    <input type="checkbox" name="diasdasemana" value="1"/> segunda <br/> 
+    <input type="checkbox" name="diasdasemana" value="2"/> terca <br/> 
+    <input type="checkbox" name="diasdasemana" value="3"/> quarta<br/> 
+    <input type="checkbox" name="diasdasemana" value="4"/> quinta<br/>   <!-- pode selecionar varios-->
+    <input type="radio" name="horario" value="manha"/> manha      <!-- pode selecionar uma-->
+    <input type="radio" name="horario" value="tarde"/> tarde
+    <input type="radio" name="horario" value="noite"/> noite
+    
+    <textarea cols=60 rows=10></textarea>
+
+    <select name="cidade" onchange="mensagem()" id="cursos">                            <!-- nao tem opção de digitar e um evento onchage evento para acção js-->
+        <option value="">selecione a cidade</option>
+        <option value="blumennau">blumennau</option>
+        <option value="palmeiras">palmeiras</option>
+        <option value="eua">eua</option>
+    </select>
+    
+
+    Cidade: <input list="cidade"  name="cidade"/>            <!--  tem opção de digitar o nome da cidade-->
+       <datalist id="cidade"> 
+        <option value="">selecione a cidade</option>
+        <option value="blumennau">blumennau</option>
+        <option value="palmeiras">palmeiras</option>
+        <option value="eua">palminopolis</option>
+       </datalist>
+
+       
+       <button type="submit"  onclick="mensagem()"> enviar</button>     <!-- ASSIM ENVIA O FOrMULARIO submi    e o evento onclick já é ad interação com JS-->
+       <button type="reset" > Limpar</button> <br/>       
+
+       <button> outra ação</button>        <!-- ASSIM ENVIA O FOrMULARIO-->
+       <button type="button"> outra ação</button>       <!-- ASSIM NAO ENVIA O FORMULARIO, AQUI SOMENTE O BOTAO TEM QUE FAZER A ACAO VIA JAVASCRIPT -->
+
+
+   </form>
+
+   <form method="post" action="contato.html">
+  
+    <label> text: </label>
+    <input type="text" name="q" value="Nome"/>
+    <input type="hidden" name="qhidden" value="Nome"/>
+    <label> text: </label>
+    <input type="nome" name="nome" placeholder="Nome"/>
+    <label> password:</label>
+    <input type="password"/>
+    <label> text area:</label>
+    <textarea> </textarea>
+    <button> outra ação</button>
+   </form>
+                       <!-- usar abaixo seletores no js-->     
+   <button onclick="acao()">selecionar</button>
+      <h1> Proway</h1>
+      <h1> Jesus</h1>
+      <h1> Aleluia, gloria a documentos</h1>
+
+<button onclick="exibirtexto()">clique aqui</button>
+      <h1 class="textos"> titulo H1</h1>
+      <h2 class="textos"> titulo H2 </h2>
+      <p class="textos"> paragrafo </p>
+
+ <input type="text" id="campo"/>   
+ <button onclick="exibirconteudo()"> clique aqui</button> 
+                             
+                                  <!--MANIPULANDO CSS VIA JS-->
+    <h4> javascript</h4>
+    <button onclick="acao2()">Clique aqui</button> </br>
+
+    <!--esses SELETORES serão manuseados via jquery-->
+    <input type="text" value="campo nome">
+    <h1 id="titulo"> titulo h1 </h1>
+    <h2 class="subtitulo"> titulo 2</h2>
+
+    <!--esses EVENTOS serão manuseados via jquery-->      <!-- obs: o disparador do evento o gatilho nao colocar dentro do html e sim dentro do script, diferente do js -->
+    <h1 id="tituloh1"></h1>                                              <!-- que é dentyro do html, o motivo é deuproblema no evento não mexe no html somente no js -->
+    <button id="botao1">Clique aqui</button> </br>
+
+    <!--esses EFEITOS serão manuseados via jquery--> 
+    <button id="exibir"> EXIBIR</button> 
+    <button id="ocultar"> OCULTAR</button> 
+    </br>
+    <img src="logo_proway.png">
+
+    <br>
+   <!--esses EFEITOS f serão manuseados via jquery-->
+    <button id="exibir2"> exibir</button>
+    <button id="ocultar2">ocultar</button>
+    <br>
+    <h1 id="titi"> aprendendo jquery</h1>
+
+    <!--esses EFEITOS f serão manuseados via jquery-->
+
+    <h1 class="exibir"> exibir</h1>
+    <hr>
+    <h2 class="ocultar"> ocular</h2>
+    <hr>
+    <h1 class="mensagem"> olá</h1>
+
+<!--esses EFEITOS f serão manuseados via jquery-->
+    <button id="button3"> CLIQUE AQUI</button>
+    <div></div> <!-- ir no head <style> e fazer as configurações da div, um quadrado-->
+        <!-- depois descer para o script para colocar animação-->
+</div>
+        <!--- <style>
+          div{
+
+          width: 10rem;
+           height: 8rem;
+           background-color: rgb(38, 230, 20);
+             }
+          </style>-->  
+          
+  <h1 id="estilo"> estilizando CSS com jQuery</h1>    
+
+  <!--esses EFEITOS f serão manuseados via jquery-->
+  <img src="jquery/logo_proway.png" title="proway" />
+
+
+</body>
+<script src="jquery/jquery-3.3.1.min.js"></script>           
+<script>
+             //vamos usar SELETORES no jqquery//
+   $(document).ready(function(){                           //(ready) signigfica pronto        //        
+ 
+   var campo = $("input").val();        // val fica no lugar de value//
+   var titulo = $("#titulo").html();    // tira o winner e deixa só html , na dive coloca # id//
+   var subtitulo = $(".subtitulo").html(); // tira o winner e deixa só html , na dive coloca . classe//
+       alert(campo);
+       alert(titulo);
+       alert(subtitulo);
+    });
+  
+    //vamos usar EVENTOS  - js//
+    $(document).ready(function(){ 
+         $("#botao1").click(function(){              // coloca o disparador e a função no mesmo local//
+         $("#tituloh1").html("voce clicou no botao");
+        });
+    });
+         //vamos usar eventos e efeitos EXIBIR E OCULTAR - js //
+
+        //exibir//
+        $(document).ready(function(){ 
+
+        $("#exibir").click(function(){
+            $("img").show();  //EXIBIR//
+        });
+         //ocultar
+         $("#ocultar").click(function(){
+            $("img").hide();  //OCULTAR//
+         });  
+       
+    });
+        document.get
+     //vamos usar eventos e efeitos FADE tempo de transiçao //
+     $(document).ready(function(){ 
+
+        $("#titi").css("display","none");     // - css - quando documento for carregado, o h1 nao terá visibilidade//
+
+        $("#exibir2").click(function(){         // defaul - tempo padrao 0.4 milisegundos quando nao especifica nada entre os parenteses
+            $("#titi").fadeIn("slow");          //  slow 0,6 milisegundos
+        });                                     // e pode colocar valor ex 3000 equivale 3segundos 
+        $("#ocultar2").click(function(){
+            $("#titi").fadeOut(3000);
+        });
+     });
+ //vamos usar eventos e efeitos SLIDE persiana //
+     $(document).ready(function(){ 
+        $(".ocultar").click(function(){
+         $(".mensagem").slideUp();                //pode deixar os parenteses sem valor fica 4segundo default//
+        });
+        $(".exibir").click(function(){
+         $(".mensagem").slideDown(2000);
+        });
+    });
+    //vamos usar eventos e efeitos ANIMATE persiana //
+    $(document).ready(function(){ 
+          
+          $("#button3").click(function() {
+
+              $("div").animate({
+                width:"20rem",
+                heigth:"10rem"
+                               
+              });
+              
+          });
+  
+      }); 
+
+      //vamos usar eventos e efeitos CSS persiana //     DUAS FOMAR DE USAR CSS//
+    $(document).ready(function(){ 
+      $("#estilo").css("color","blue");        //um unico estilo//
+                //ou assim //
+      $("#estilo").css({       //varios estilos//
+        "color":"blue",
+        "font":"times new roman",
+        "borderStyle":"solid",
+        "borderColor":"yellow"
+    
+    });        
+
+    });
+
+    //alterar ATRIBUTOS//
+    $(document).ready(function(){
+      $("img").attr("width", "700px");       //attr significa atributo - veja os atributos a serem alterados: width, //
+      $("img").attr("title", "aterando titulo via jquery");
+
+    });
+    
+
+
+           //logica em js//
+      var name = "mar";
+      var idade = 20;
+      var altura = 1.80;
+
+      window.alert(name);
+      window.alert(idade);
+      window.alert(altura);
+     
+
+   var nota = 80;
+   var faltas = 20;
+                                       
+   if ((nota = 50 )||(faltas=10)) {     /*OU ||  E && */
+      window.alert("aprovado");
+   }else {
+      window.alert("reprovado"); 
+   }
+      
+        //funções//
+
+    var idade = 10;
+    function mensagem() {
+        if(idade >= 18){
+            alert("maior de 18");
+        }else{
+            alert("de menor");
+        }
+    }
+
+     function mensagem(){
+        var curso = document.getElementById("cursos").value;
+        alert(curso);
+    } 
+    function acao(){
+        var texto = document.getElementsByTagName("h1") [0];
+        alert(texto.innerHTML);
+    }
+
+    function exibirtexto(){
+        var campo = document.getElementsByClassName("textos") [2];
+        alert(campo.innerHTML);                          // desse jeito vem  o nome da tag que está//
+    }
+
+    function exibirconteudo() {
+
+        var conteudo = document.getElementById("campo");
+        alert(conteudo.value);
+
+        
+    }
+    function acao2() {
+         
+          var textos = document.getElementsByTagName("h4") [0];
+           // css//
+           textos.style.color = "rgba(22,255,255,1)";
+           textos.style.background = "rgba(224,10,50,1)";
+           textos.style.font = "5rem";
+        
+           textos.innerHTML = "Curso de java Script";           //desse jeito altera o nome do titulo , nao fizemos alert.//
+    }                                                    
+</script>
+
+</html>

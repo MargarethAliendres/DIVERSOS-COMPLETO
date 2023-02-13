@@ -1,0 +1,31 @@
+    
+                    JQUERY É UMA BIBLIOTECA - CRIADA EM NY EM 2006. - FAZ TUDO QUE O JS FAZ, COM MENOS CÓDIGO
+             
+          tem que já ter instalado o node e o npm - que já vem junto com o onde
+
+       1- ENTRAR NO SITE  JQUERY.COM  - DOWNLOADJQUERY -
+
+      2-  BAIXAR O :  DOWNLOAD THE COMPRESSED,PRODUCTION JQUERY 3.3.1 (NAO TEM COMENTARIO E NAO TEM ENDENTAÇÃO
+MAS É MAIS LEVE)  OBS: É BOM FAZER O DOUNLOAD, POIS NAO CORRE RISCO DA PAGINA JQUERY ESTÁ FORA DO AR.
+
+      3 - APÓS BAIXADO NA PASTA COM NOME JQUERY, ABRIR A IDE E APÓS ANEXAR O LINK NO INDEX.HTML, abaixo.
+    
+      <script src="jquery/jquery-3.3.1.min.js"></script>             <!-- usando jquery-->
+      
+     <script>
+       $(document).ready(function(){      
+
+        });
+
+     </script> 
+
+OBS: O JAVA SCRIPT EXECUTA LINHA A LINHA, TEM QUE ESTÁ PRONTO O HTML DEPOIS AS FUNÇÕES. CASO HAJA UMA FUNÇÃO
+PRIMEIRO PARA ABRIR UM PARAGRAFO ABAIXO, VAO DAR ERRO.
+
+POR ISSO NO JQUERY  COLOCA ESSE CODIGO ACIMA QUE VALIDA,  AGUARDA O DOMUNTO ESTÁ PRONTO PARA EXECUTAR AS FUNÇÕES
+ $(document).ready(function(){
+   
+ });      
+
+SIGNIFICA PRONTO
+     4- 

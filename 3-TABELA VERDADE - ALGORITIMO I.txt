@@ -1,0 +1,239 @@
+Algoritmo "TABELA VERDADE"
+
+
+EX: 1
+
+Var
+
+i, j : inteiro
+
+inicio
+
+ //entrada de dados       // pode ser aqui constant ou pedir para o cliente colocar o dado//
+ i <- 10
+ j <- 20
+  
+// processamento/saida
+      nao    e    nao (nao)
+      sim    e    nao (nao)
+      sim    e    sim (sim)
+se (i = 10) E  ( J = 20) entao      //esse E é o &&, os dois valores deve ser verdade para fazer algo.//
+   escreval("Fazer algo")
+senão
+   escreval ("nao fazer algo")
+
+  fimse
+
+fimalgoritmo
+
+
+EX: 2
+
+
+Var
+
+i, j : inteiro
+
+inicio
+
+ //entrada de dados       // pode ser aqui constant ou pedir para o cliente//
+ i <- 10
+ j <- 20
+
+  
+// processamento/saida
+
+    nao    ou    nao (nao)
+    sim    ou    nao (sim)
+    sim    ou    sim (sim)
+se (i > 10) OU  ( J >10) entao      //(esse OU é o OR, ||, )//  //UM DOS valores deve ser verdade para fazer algo.//
+   escreval("Fazer algo")
+senão
+   escreval ("nao fazer algo")
+
+  fimse
+
+fimalgoritmo
+
+
+EX: 3
+
+Var
+
+lado1, lado2, lado3: real
+
+inicio
+
+ //entrada de dados       /
+ escreval ("lado1")
+ leia(lado1)
+ 
+ escreval("lado2")
+ leia(lado2)
+ 
+ escreval("lado3")
+ leia(lado3)
+
+// processamento/saida
+
+se (lado1>lado2+lado3) OU  ( lado2>lado1+lado3) OU (lado3> lado2+ lado1) entao
+   escreval("não e um triangulo")
+   
+senão
+   se (lado1 = lado2) E (lado2=lado3) entao
+   escreval("equilatero")
+senao
+   se(lado1 = lado2 ) OU (lado2 =lado3)   entao
+    escreval("isoceles")
+senão
+   escreval ("escaleno")
+
+  fimse
+  fimse
+  fimse
+
+fimalgoritmo
+
+
+EX: 4
+
+
+Var
+peso, altura, imc: real
+
+inicio
+
+ //entrada de dados       /
+ escreval("Informe seu peso")
+ leia(peso)
+ 
+ escreval("Infome sua altura")
+ leia(altura)
+
+// processamento               // operador de potencia
+ imc <- peso/altura ^ 2       // aqui pode usar loop ,vou aprender mais na frente//
+
+//saida
+
+se imc < 19 entao
+   escreval("abaixo do peso")
+senão
+   se imc < 24 entao
+   escreval ("peso ideal")
+senao
+   escreval ("acima do peso")
+
+  fimse
+  fimse
+
+fimalgoritmo
+
+
+EX: 5
+
+
+Var
+
+voto: inteiro
+
+inicio
+
+ //entrada de dados
+
+   escreval("digite seu Voto")
+   leia(voto)
+
+// processamento/saida
+se voto = 22 entao
+   Escreval ("margareth")
+senão
+   se voto = 30 entao
+   Escreval ("Derlon")
+senao
+   se voto = 10  entao
+   Escreval ("pernalonga")
+   senao
+   Escreval ("voto Nulo")
+   
+   fimse
+   fimse
+   fimse
+
+fimalgoritmo
+
+
+EX: 6
+
+Var
+
+voto: inteiro
+retorno: caractere
+
+inicio
+
+ //entrada de dados
+
+escreval("digite seu Voto")
+leia(voto)
+
+// processamento/saida
+                                         // trabalha só com igualdade//
+//switch case//
+escolha voto                          // Seu uso é indicado quando os valores a serem analisados nessas condições são pré-definidos
+caso 20
+  escreval ("Voce votou em Marcelo")
+caso 30
+ escreval ("voce votou em Derlon")
+caso 40
+ escreval ("voce votou em Pernalonga")
+outrocaso
+ escreval("voto nulo")
+ 
+
+ fimescolha
+
+fimalgoritmo
+
+
+
+derlon me falou para criar a variavel retorno
+
+
+Var
+
+voto: inteiro
+retorno: caractere
+
+inicio
+
+ //entrada de dados
+
+escreval("digite seu Voto")
+leia(voto)
+
+// processamento/saida
+escolha voto
+caso 20
+  retorno <-"Voce votou em Marcelo"
+caso 30
+ retorno <-"voce votou em Derlon"
+caso 40
+ retorno <-"voce votou em Pernalonga"
+outrocaso
+ retorno <-"voto nulo"
+ 
+
+ fimescolha
+ escreval(retorno)
+
+
+fimalgoritmo
+
+
+
+
+
+
+
+
+

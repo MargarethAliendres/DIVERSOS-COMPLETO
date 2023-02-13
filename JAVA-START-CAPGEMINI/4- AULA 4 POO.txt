@@ -1,0 +1,241 @@
+                       
+                    12/11/2022
+                      
+                          CLASSE   - 1 CLASSE - EX: CALCULO DE IMC
+
+
+package Classe;
+
+                             
+public class Pessoa {                        // abstração - coloca somente os atributos que ira resolver o problema
+    
+    private float peso;   // ATRIBUTOS      // encapsulamento dos atributos para não serem modificados em outros lugares, coloca private
+    private float altura;
+ 
+o metodo construtor com paramento abaixo      (alt+insert)cria automaticamente
+                                          
+   public Pessoa(float peso,float altura ){   // desse jeito obriga na criação doobjeto ja passar um valor para Pessoa.
+     this.peso = peso;
+     this.altura = altura;
+
+    } 
+
+      OU
+
+metodo construtor sem paramentro abaixo      
+ 
+   public Pessoa(){             //esse metodo construtor noa precisa ser chamado, quando cria o objeto ele já executa
+   System.out.println(" Margareth Clarinda Carvalho Aliendres"); 
+  } 
+
+metodo de ação/ o que a entidade pessoa vai fazer.  
+
+    public float calcularIMC(){        // METODO do que a entidade vai fazer, responsabilidade, qual é a ação da entidade pessoa
+        
+        float imc = peso /(altura*altura);
+        return imc;
+    }
+                                         //usa abaixo os meotodos acessores - que sao os modificadores de acesso
+  
+
+metodos modificadores de acesso /acessores     (alt+insert)cria automaticamente
+       
+                     //paramentro//                    para o objetoPessoa modificar os dados da pessoa.
+    public void setPeso(float peso){            
+        this.peso = peso;
+        
+    }
+    public float getPeso(){
+        return peso;
+    }
+                          //paramentro//
+    public void setAltura(float altura){
+        this.altura = altura;
+        
+    }
+    public float getAltura(){
+        return altura;
+    }
+}
+ 
+}
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                                       OBJETO 
+                                   
+
+
+                       CLASSE PRINCIPAL/MAIN  -  CRIA O OBJETO  - na classe main principal
+
+package Classes;
+
+import java.util.Scanner;
+
+public class Main {
+   
+    public static void main(String[] args) {
+       
+        Scanner leitor = new Scanner (System.in);
+       
+        Pessoa objetoPessoa = new Pessoa();   // construtor na classe sem paramentro deixa aqui vazio
+
+          OU
+     
+        Pessoa objetoPessoa = new Pessoa(70.0f, 1.50f);   // construtor na classe com paramentro passa valor aqui
+        
+        
+        System.out.println("Digite o peso da pessoa");            // é objeto pessoa que modifica as informaçoes da pessoa.
+        objetoPessoa.setPeso(leitor.nextFloat());
+        
+        System.out.println("Digite a altura da pessoa");
+        objetoPessoa.setAltura(leitor.nextFloat());
+        
+        System.out.println("IMC - " + objetoPessoa.calcularIMC());
+       
+    }
+    
+}
+============================================================================================================
+
+
+                                     HERANÇA - VARIAS CLASSES - EX CADASTRO DEPARTAMENTO PESSOAL
+
+
+public class Funcionario {
+    
+    private String nome;
+    private String cpf;
+    private Date dataNascimento;
+    private float salario;
+
+   
+    
+    
+    
+    //metodo modificadores de acesso//
+       public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public float getSalario() {
+        return salario;
+    }
+
+    public void setSalario(float salario) {
+        this.salario = salario;
+    }
+  
+    
+    
+}
+     
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+package Heranca;
+
+import java.util.Date;
+
+
+public class Vendedor extends Funcionario{    // tem que colocar extends
+
+    private int TotalitensVendidos;    //atributos exclusivos do vendedor
+    private float comissaoPorItens;
+
+              //metodo construtor//
+    public Vendedor() {      
+        super();             // tras tudo que o funcionario tem, se ´nao colocar o vendedor fica sem atriburo//
+        
+     } 
+               //metodo de açao
+     public float calcularSalario() {
+         return super.getSalario() + (this.comissaoPorItens*TotalitensVendidos);
+     }
+
+           // metodo modificadores de acesso
+    public int getTotalitensVendidos() {
+        return TotalitensVendidos;
+    }
+
+    public void setTotalitensVendidos(int TotalitensVendidos) {
+        this.TotalitensVendidos = TotalitensVendidos;
+    }
+
+    public float getComissaoPorItens() {
+        return comissaoPorItens;
+    }
+
+    public void setComissaoPorItens(float comissaoPorItens) {
+        this.comissaoPorItens = comissaoPorItens;
+    }
+    
+     
+     
+}
+ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+package Heranca;
+
+
+public class Motorista extends Funcionario{
+
+     
+    }
+    
+   
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                                       
+                                OBJETO - MAIN PRINCIPAL
+
+package Heranca;
+
+import java.util.Date;
+
+
+public class Main {
+    
+    public static void main(String[] args) {
+        
+        Vendedor ObjetoVendedor = new Vendedor();
+             ObjetoVendedor.setCpf("20202020");
+             ObjetoVendedor.setDataNascimento(new Date());   // tras a data de hoje//
+             ObjetoVendedor.setSalario(100.00f);
+             ObjetoVendedor.setNome("Margareth");
+             ObjetoVendedor.setComissaoPorItens(10.0f);
+             ObjetoVendedor.setTotalitensVendidos(10);
+             
+            System.out.println("O salario do Vendedor é: " + ObjetoVendedor.calcularSalario());
+            
+        
+        Motorista ObjetoMotorista = new Motorista();
+     
+           
+    }
+    
+}
+
+
+
+

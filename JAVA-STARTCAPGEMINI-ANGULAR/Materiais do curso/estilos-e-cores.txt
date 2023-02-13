@@ -1,0 +1,23 @@
+.container {
+    padding: 10px;
+    margin: 20px 0;
+    width: 80%;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;    
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.content {
+    background-color: white;
+    padding: 5px;
+}
+
+#3D4D63
+#B2E7E8
+#BFB9AA
+#F2D096
+#ED8975
+#FFE3DC
+#A2AD91
+#3A2D32

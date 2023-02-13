@@ -1,0 +1,68 @@
+
+       INTERFACE LIGADA AO POO É UM  ELEMENTO DO JAVA-     FICA ENTRE
+       A TELA E  O CLIENTE. 
+       É QUASE UMA HERANÇA MULTIPLA, POIS HERANÇA SÓ FAZ DE UMA UNICA CLASSE.
+
+* ELEMENTO DO JAVA QUE APOS CRIAR AS CLASSES, NUMERADORES, 
+CRIA A INTERFACE E VINCULA ELA A VARIAS CLASSES.
+
+* EX. INTERFACE-VEICULO  VINCULA ELA A CLASSES COM CARACTERISTICAS EM COMUM, CARRO, CAMINHAO, MOTO
+
+A INTERFACE VEICULO VAI TER METODOS ESPECIFICOS, EX ACELERAR, FREAR, VELOCIDADE,
+
+
+EX: NO ECLIPSE, NA BARRA DE FERRAMENTAS 
+
+FILE-NEW-   Java Project   (esse é um projeto desktop)
+
+apos clicar lado direito mouse - src-new-package-(programas)
+lado direirto encima do pacote- new-interface.
+
+ 1º crie os metodos
+package Programas;         
+                                                                     //interface Animal
+public interface Animal {
+		public void animalSom();
+		public void animalComer();
+	}
+
+
+2º crie as classes comim sem o main                //classe bovina
+package Programas;
+
+public class Bovino implements Animal{                 //e coloca implements com a interface criada
+
+	@Override
+	public void animalSom() {
+		System.out.println("Muuuu");
+		
+	}
+
+	@Override
+	public void animalComer() {
+		System.out.println("Comendo capim");	
+		
+	}
+
+	
+	}
+
+3º -  crie uma classe main normal           //onde será mostrado o que acbou de ser feito
+
+package Programas;
+
+public class InterfacePrincipal {
+
+	public static void main(String[] args) {
+
+    Animal animal = new Bovino();                     //crie um objeto igual quando cria no polimorfismo
+    animal.animalComer();
+    animal.animalSom();
+    
+    
+    
+
+	}
+
+}
+

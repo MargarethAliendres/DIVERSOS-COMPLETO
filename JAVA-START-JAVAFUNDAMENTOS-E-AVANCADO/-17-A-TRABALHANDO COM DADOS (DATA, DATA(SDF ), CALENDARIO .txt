@@ -1,0 +1,132 @@
+
+FAZER TRATAMENTO DE DATAS   (USANDO SDF)
+
+DATAS - FORMATAR E CONVERTER
+
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.util.TimeZone;
+
+public class DatasUsandoSDF {
+
+	public static void main(String[] args) throws ParseException {
+		// Usando SDF - Simple Date Format
+		
+		SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		sdf3.setTimeZone(TimeZone.getTimeZone("GMT"));
+		Date x1 = new Date(29/12/2021);
+		Date x2 = new Date(System.currentTimeMillis());
+		Date x3 = new Date(0L);
+		Date x4 = new Date(1000L * 60L * 60L * 5L);
+		Date y1 = (Date) sdf1.parse("29/12/2021");
+		Date y2 = (Date) sdf2.parse("29/12/2021 16:32:55");
+		Date y3 = (Date) Date.from(Instant.parse("2021-12-29T16:32:55Z"));
+		
+		System.out.println("x1: " + x1);
+		System.out.println("x2: " + x2);
+		System.out.println("x3: " + x3);
+		System.out.println("x4: " + x4);
+		System.out.println("y1: " + y1);
+		System.out.println("y2: " + y2);
+		System.out.println("y3: " + y3);
+		System.out.println("-------------");
+		System.out.println("x1: " + sdf2.format(x1));
+		System.out.println("x2: " + sdf2.format(x2));
+		System.out.println("x3: " + sdf2.format(x3));
+		System.out.println("x4: " + sdf2.format(x4));
+		System.out.println("y1: " + sdf2.format(y1));
+		System.out.println("y2: " + sdf2.format(y2));
+		System.out.println("y3: " + sdf2.format(y3));
+		System.out.println("-------------");
+		System.out.println("x1: " + sdf3.format(x1));
+		System.out.println("x2: " + sdf3.format(x2));
+		System.out.println("x3: " + sdf3.format(x3));
+		System.out.println("x4: " + sdf3.format(x4));
+		System.out.println("y1: " + sdf3.format(y1));
+		System.out.println("y2: " + sdf3.format(y2));
+		System.out.println("y3: " + sdf3.format(y3));
+	}
+}
+___________________________________________________________
+
+FAZER TRATAMENTO DE CALENDARIO
+
+
+import java.util.Calendar;
+
+public class ClasseCalendar {
+
+	public static void main(String[] args) {
+		// Recupera��o da data com a classe Calendar
+		
+		System.out.println("==> Recupera��o da data com a classe Calendar");
+		Calendar cal = Calendar.getInstance();
+		System.out.println("Data e Hora atual: " + cal.getTime() + "\n");
+		
+		// Mostra o dia da semana, m�s e ano
+		System.out.println("==> Mostra o dia da semana, m�s e ano");
+		System.out.println("Data/Hora atual: " + cal.getTime());
+		System.out.println("Ano: " + cal.get(Calendar.YEAR));
+		System.out.println("M�s: " + cal.get(Calendar.MONTH));
+		System.out.println("Dia do M�s: " + cal.get(Calendar.DAY_OF_MONTH) + "\n");
+
+		// Alterando a data/hora com m�todo set
+		System.out.println("==> Alterando a data/hora com m�todo set");
+		cal.set(Calendar.YEAR, 2022);
+		cal.set(Calendar.MONTH, Calendar.JANUARY);
+		cal.set(Calendar.DAY_OF_MONTH, 04);
+
+		System.out.println("Data/Hora atual: " + cal.getTime());
+		System.out.println("Ano: " + cal.get(Calendar.YEAR));
+		System.out.println("M�s: " + cal.get(Calendar.MONTH));
+		System.out.println("Dia do M�s: " + cal.get(Calendar.DAY_OF_MONTH)+ "\n");
+		
+				
+		
+		// Recuperando a hora do dia
+		System.out.println("==> Recuperando a hora do dia");
+		
+		Calendar cal1 = Calendar.getInstance();
+		int hora = cal1.get(Calendar.HOUR_OF_DAY);
+		System.out.println("Agora s�o: " + hora + " hrs");
+		if(hora > 6 && hora < 12){
+			System.out.println("Bom Dia");
+		}else if(hora > 12 && hora < 18){
+			System.out.println("Boa Tarde");
+		}else{
+			System.out.println("Boa Noite");
+		}
+	}
+---------------------------------------------------------------------------------------------------------
+FAZER TRATAMENTO CONVERSAO DATAS
+
+
+ import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+public class ConversaoDatas {
+
+	public static void main(String[] args) throws ParseException {
+		Calendar c = Calendar.getInstance();
+		Date data = c.getTime();
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		System.out.println("Data formatada: "+ sdf.format(data));
+
+		//Converte Objetos
+		System.out.println("Data convertida: "+ sdf.parse("02/08/1970"));
+
+	}
+
+}
+
+
+
+

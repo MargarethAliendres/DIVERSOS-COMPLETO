@@ -1,0 +1,40 @@
+<p>Aleluai, gloria a ti Jesus Cristo.</p>
+
+<p> te amo Deus, cuida da minha casa e da minha familia.</p>
+
+<!-- Property Binding (vinculação de propriedade)-->
+<img [src]="urlImagem" width="100">  <br>
+
+<!-- Event Binding (vinculação de evento) -->
+<button (click)="mostrarDataNascimento()" type="button"> Mostrar data de nascimento </button>
+
+<!-- interpolacção de dados (criar as variariaves na classe do arquivo segundo-component.componet ts) e chama aqui n html-->
+       <!-- use o pipe e coloca uppercase deixa tudo maiusculo,  na data foi colocado a data contraria dai usou o pipe para colocar nessa ordem-->
+<p> Nome: {{nome | uppercase}}</p>
+<p> Data de nascimento: {{datadenascimento | date: "dd/MM/yyyy"}}</p>
+
+
+<!-- Too way data binding!--  (vinculado o template com o componente)-->
+
+<!--OBS:  é usado quando está preenchendo um formulário
+
+  ir no app.module.ts, no import e adicionar esse formsModule, para o  Too way data binding funcionar no input
+imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule
+],
+-->
+<h1>Too way data binding!</h1>
+
+<label for="nomear"> Digite seu nome:</label>
+<input type="text" [(ngModel)]="nomear">
+<p>Nome digitado:{{nomear}}</p>
+
+
+
+
+
+
+<!-- na documentação do ANGULAR pega os formatos dos pipes p-->
+<!-- é possivel criar os proprios pipes atraves do cmd digitar o comando: -->

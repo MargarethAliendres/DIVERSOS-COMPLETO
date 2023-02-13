@@ -1,0 +1,348 @@
+  
+PERSISTIR DADOS É FAZER INCLUSAO , EXCLUSAO, ALTERAÇÃO, SELECAO DE DADOS..
+
+
+JDBC - BIBLIOTECA JAVA QUE PERMITE COM QUE A FERRAMENTA A 
+A QUAL ESTEJAMOS TRABALHANDO CONECT AO BANCO DE DADOS.
+
+
+FERRAMENTA PARA TRABALHAR COM BANCO -  
+
+     * DBEAVER 
+     * USAREMOS O POSTGREE BD
+
+ESTÁ NA PASTA ROSA (BANCO DE DADOS SQL), DESDE A INSTALAÇÃO DO POSTGREE, E DO DBEAVER
+ E A CRIACAO DO BANCO E TABELA, LOGO DEPOSI O DOUNLOAD 
+DO JDBC E COLOANDO O JDBC NO ECLIPSE.
+
+                              No eclipse
+                
+                               //classe Menu
+1°- cria a classe main principal, e adicione o JDBC já baixado, clica lado direito maouse encima dessa classe, BIULD PATH e segue os
+passos que esta na pasta rosa BD.
+
+obs: segue esses processos abaixo, no final estará essa classe aqui completa por ultimo.
+
+
+                                 //classe Dao    (camada de conexao)
+2º -  criar uma classe simples, nao com main.(E A CLASSE QUE VAI FAZER A CONEXAO AO BANCO)
+               * com nome dao  (separa a camada de conexão de BD, da camanda de negocio
+  (pode criar com ourto nome, desde que entenda que é de persistencia de dados)
+
+package Cadastros;
+
+	import java.sql.CallableStatement;
+	import java.sql.Connection;
+	import java.sql.DriverManager;
+	import java.sql.PreparedStatement;
+	import java.sql.ResultSet;
+	import java.sql.SQLException;
+
+	public class Dao {
+		
+		Connection con;                         // Conexao ao Banco de Dados
+		PreparedStatement stmt;             // Acessa a Tabela ( insert, update, delete , select)
+		ResultSet rs;                               // Consulta a Tabela( select )
+		CallableStatement call;                   // Procedures e Function
+		              // o open abre a conexaao//
+		public void open() throws Exception{                 // esse nome cadastro é o banco que criamos//
+		    String url = "jdbc:postgresql://localhost:5432/cadastro";    // esse ultimo "cadastro é o nome do banco de dados"
+		    String user = "postgres";
+		    String password = "Mar202598*";                                    //senha que criei na instalacao do postgree//
+		    try {
+		        Class.forName("org.postgresql.Driver");                 //muda de acordo do tipo do banco    
+		        con = DriverManager.getConnection(url, user, password);      
+		    } catch (SQLException | ClassNotFoundException ex) {
+		        System.out.println("Erro ao conectar com o banco");
+		    }
+		}
+		              //o close fecha a conexao//
+		public void close() throws Exception{		
+			con.close();
+			
+		}
+	}
+
+                                           
+                        //classse Pessoa           
+3º- Criar a segunda classe, Pessoa, COM OS MESMOS NOMES DE ATRIBUTOS JÁ COLOCADOS 
+NO BANCO DE DADOS QUE CRIAMOS
+
+package Cadastros;
+
+public class Pessoa {
+	
+	private int idPessoa;
+	private String nomePessoa;
+	private String email;
+	
+	
+	public Pessoa() {
+		
+		
+	}
+	                              /*esse construtor que vamos fazer opercao*/
+	public Pessoa(String nomePessoa, String email) {      
+		super();       /*usa quando tem heranca, vai ter heranca no classe pessoaDao*/
+		this.nomePessoa = nomePessoa;
+		this.email = email;
+	}
+		
+	                              /**esse construtor que vamos fazer inclusao**/
+	public Pessoa(int idPessoa, String nomePessoa, String email) {
+		super();         /*usa quando tem heranca, vai ter heranca no classe pessoaDao*/     
+        this.idPessoa = idPessoa;
+		this.nomePessoa = nomePessoa;
+		this.email = email;
+								
+	}
+	
+	public int getIdPessoa() {
+	return idPessoa;
+	}
+	public void setIdPessoa(int idPessoa) {
+	this.idPessoa = idPessoa;
+	}
+	public String getNomePessoa() {
+		return nomePessoa;
+	}
+	public void setNomePessoa(String nomePessoa) {
+		this.nomePessoa = nomePessoa;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
+	
+		
+	}
+
+                                         //PessoaDao  (camada de persistencia para a classe Pessoa)
+
+	
+4°-  aqui coloca todos os metodos de incluir, updade, excluir, e pesquisar.	
+
+
+package Cadastros;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+                             //heranca da DAO//
+public class PessoaDao extends Dao {
+	                                            //O p é o objeto dai o metodo incluirPessoa vai receber os atributos, atraves do objeto
+	public void incluirPessoa(Pessoa p) throws Exception {
+		open();    //abre a conexao//
+		stmt = con.prepareStatement("insert into pessoa values(?,?,?)");
+		stmt.setInt(1, p.getIdPessoa());                   //1 interrogacao por cada item//
+		stmt.setString(2, p.getNomePessoa());
+		stmt.setString(3, p.getEmail());
+		stmt.execute();
+		stmt.close();
+		close();    //fecha a connexao//
+	}
+
+	                                      //O p é o objeto dai o metodo excluirPessoa vai receber os atributos, atraves do objeto
+	public void alterarPessoa(Pessoa p) throws Exception {
+		open();
+		stmt = con.prepareStatement("update Pessoa set nomepessoa = ?, email = ? where idPessoa = ?");
+		stmt.setString(1, p.getNomePessoa());                                    //procura pelo ID//
+		stmt.setString(2, p.getEmail());
+		stmt.setInt(3, p.getIdPessoa());
+		stmt.execute();
+		stmt.close();
+		close();
+	}
+                                                       //O p é o objeto dai o metodo excluirPessoa vai receber os atributos, atraves do objeto
+	public void excluirPessoa(Pessoa p) throws Exception {
+
+		open();
+		stmt = con.prepareStatement("delete from Pessoa where idPessoa = ?");
+		stmt.setInt(1, p.getIdPessoa());
+		stmt.execute();
+		stmt.close();
+		close();
+
+	}
+	// retornando um objeto
+	public Pessoa consultarPessoaIndividual(int cod) throws Exception {
+			open();
+			stmt = con.prepareStatement("select * from pessoas where idPessoa = ? ");
+			stmt.setInt(1, cod);
+			try {
+				rs = stmt.executeQuery();			
+			}
+			catch (SQLException ex) {
+				throw new Exception(ex);
+//		        System.out.println("Falha ao recuperar o registro. Contate TI");
+			}
+			finally {
+				System.out.println("Fechando a conex�o com banco de dados no Finally");
+				close();
+			}
+			Pessoa p = null;
+			if (rs != null) {
+				if (rs.next()) {
+					p = new Pessoa();
+					p.setIdPessoa(rs.getInt("idPessoa"));
+					p.setNomePessoa(rs.getString("nomePessoa"));
+					p.setEmail(rs.getString("email"));				
+				}
+			}
+			close();
+			return p;
+	}
+
+	public List<Pessoa> ListarPessoas() {
+		try {
+			open();
+			stmt = con.prepareStatement("select * from pessoa");
+			rs = stmt.executeQuery();
+	        List<Pessoa> listaPessoas = new ArrayList<>();
+			while (rs.next()) {
+				Pessoa p = new Pessoa();
+				p.setIdPessoa(rs.getInt("idPessoa"));
+				p.setNomePessoa(rs.getString("nomePessoa"));
+				p.setEmail(rs.getString("email"));
+				listaPessoas.add(p);
+			}
+			close();
+			return listaPessoas;
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+	}
+}
+                                                              //classe menu    (main)
+
+5° aqui cria as instancias e faz as inserçoes, exlusoes, e pesquisas de dados.
+
+
+package Cadastros;
+
+import java.util.List;
+
+public class Menu {
+			public static void main(String[] args) {
+				PessoaDao pd = new PessoaDao();
+				try {
+					 //Incluir uma pessoa
+					      
+					  
+		//crio os objetos/instancias, quantos for preciso//       //esse é o contrutor criado na classe pessoa, preencher na ordem que está la no construtor.//
+					Pessoa p1 = new Pessoa(11,"mar", "jose@gmail.com");
+					Pessoa p2 = new Pessoa(12,"han", "jose@gmail.com");
+					Pessoa p3 = new Pessoa(13,"reb", "jose@gmail.com");  
+					
+					//dai chamo o metodo que está na classe pessoaDao para incluir os dados do objeto//
+					pd.incluirPessoa(p1);
+					pd.incluirPessoa(p2);
+					pd.incluirPessoa(p3);
+					
+					// Alterar uma pessoa
+					// - Alterar a informa��o desejada usando o set(Classe encapsulada)
+					try {
+						Pessoa pes = pd.consultarPessoaIndividual(7);
+					
+						// se o resultado da consulta a pessoa retornar null � porque n�o encontrou
+						// a pessoa
+						if (pes != null) {
+								pes.setEmail("derlon.aliendres@gmail.com");
+								// chamar o m�todo de cont�m o comando update
+								pd.alterarPessoa(pes);
+						} else {
+							System.out.println("Pessoa n�o encontrada ou falha no acesso ao banco de dados");
+						}
+				
+						// Listando todas as pessoas
+						List<Pessoa> listaPessoas = pd.ListarPessoas();
+						for(Pessoa p : listaPessoas){
+							System.out.println("Id.: " + p.getIdPessoa());
+							System.out.println("Nome : "  +p.getNomePessoa());
+							System.out.println("Email : " +p.getEmail());
+						}
+					}
+					catch (Exception ex ){
+				        System.out.println("Alguma coisa deu errado no acesso ao banco de dados. Contate a TI");
+					}
+				
+					//Excluir uma pessoa    
+					// verificar se a pessoa existe por c�digo
+					Pessoa pessoa1 = pd.consultarPessoaIndividual(3);
+					pd.excluirPessoa(pessoa1); // chamar o m�todo que cont�m o comando delete
+					
+					// Listando todas as pessoas
+					List<Pessoa> listaPessoas = pd.ListarPessoas();
+					for(Pessoa p: listaPessoas){
+						System.out.println("Id.: " + p.getIdPessoa());
+						System.out.println("Nome : "  +p.getNomePessoa());
+						System.out.println("Email : " +p.getEmail());
+					}
+					
+				
+			}catch (Exception e) {
+					System.out.println("Error:  " + e.getMessage());
+				}
+				
+				  
+				 
+				
+			}
+				
+}
+
+
+___________________________________________________________________________________________
+
+POR ULTIMO COMO FAZER CONSULTA A BANCO NA (CLASSE MAIN)
+
+
+package Cadastros;
+
+import java.util.List;
+
+public class Teste2 {
+
+	public static void main(String[] args) throws Exception {   //o metodo consultarPessoaIndividual obigou a colocar esse throws aqui//
+		                                                        //se usou dentro do metodo tem que colocar aqui na main//
+		
+		
+		//CONSULTA DE UM REGISTRO - RETORNANDO UM OBJETO
+		
+		 
+		 PessoaDao pd = new PessoaDao();    //tem que instanciar/criar objeto o pessoa Dao tambem, pois ele que tem os metodos.
+		                                            //ESSE É O ID QUE QUERO CONSULTAR
+		 Pessoa pess1 = pd.consultarPessoaIndividual(2);     //teve que instanciar/criar objeto da classe pessoa para acessar os atributos pelo get e set  
+		 System.out.println("ID ------->:" + pess1.getIdPessoa() );
+		 System.out.println("Nome ----->:" + pess1.getNomePessoa() );
+		 System.out.println("Email ---->:" + pess1.getEmail() );
+		
+		 
+	  //CONSULTA UMA LISTA DE REGISTRO - ELEMENTOS
+		 
+		 PessoaDao po = new PessoaDao();     //tem que instanciar pois ele que tem os metodos
+		 
+           List<Pessoa> ListarDados = po.ListarPessoas();   
+           
+           for (Pessoa pu : ListarDados) {            //insancio u
+        	   
+        	   System.out.println("Codigo: " + pu.getIdPessoa() );   //uso a nova instancia pu
+        	   System.out.println("Nome: " + pu.getNomePessoa() );
+        	   System.out.println("email: " + pu.getEmail() );
+        	   System.out.println("**********************");       //isso separa a tabela 
+		}
+           
+         
+		 
+	}
+
+}
+
+
+

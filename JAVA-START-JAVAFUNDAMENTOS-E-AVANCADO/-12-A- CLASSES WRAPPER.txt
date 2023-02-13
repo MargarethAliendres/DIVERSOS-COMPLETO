@@ -1,0 +1,102 @@
+
+         WRAPPER SÃO CLASSES - QUE POSSUEM METODOS PUBLICOS DISPONIVEIS
+SUBCLASSE OBJECT.
+
+      WRAPPER - EMPACOTAMENTO/EMBRULHO
+
+EX:
+
+METODO 
+
+equals(object)  - usamos para comparação
+toString - possibilita imprimir o conteudo de um objeto em formato texto
+Interger.parseInt()   //esse exemplo para todas as classes abaixo
+Boolean  
+Character
+Byte
+Short 
+Long
+Float
+Double
+
+Classes derivadas da subclasse NUMBER 
+possuem varios metodos para devolverem um tipo primitivo, tais como: 
+byteValue(); shortValue(); intValue(); doubleValue(); floatValue();
+
+Alem disso as classes derivadas da subclasse NUMBER 
+possuem o método comparteTo( objeto que faz comparacao entre objetos wrapper
+
+
+      tipo primitivo                         classe wrapper           subclasse 
+
+              Boolean                               Boolean  
+              Char       Autoboxing --->     Character 
+              byte                                     Byte
+              short                                   Short 
+               int                                      Interger 
+               long                                   Long
+               float                                   Float
+               Double   Unboxing   <--     Double
+
+
+conversao automatica:
+
+Autoboxing   - o tipo primittivo passar a ser um objeto
+Unboxing   
+
+O TIPO PRIMITIVO NAO TEM COMO TRANSFORMAR EM OBJETO
+SEM UMA CLASSE WRAPPER.
+
+
+
+import java.util.Locale;
+
+public class Demonstracao {
+
+	public static void main(String[] args) {
+		// Um tipo primitivo n�o tem como transformar em objeto a n�o ser utilizando 
+		// as classes Wrapper
+		//Autoboxing - exemplos
+		   
+		   Boolean bolWrapped =  true;
+		   System.out.println(bolWrapped.getClass());
+		   
+	       Character chWrapped = 'a'; 
+	       System.out.println(chWrapped.getClass());
+	       
+	       Byte byteWrapped = 1;
+	       System.out.println(byteWrapped.getClass());
+	       
+	       Short shoWrapped = 'B';
+	       System.out.println(shoWrapped.getClass());
+	       
+	       Integer intWrapped = 5215; 
+	       System.out.println(intWrapped.getClass());
+	       
+	       Long longWrapped = 14585645666L;
+	       System.out.println(longWrapped.getClass());
+	       
+	       Float floatWrapped = 3.14159f;
+	       System.out.println(floatWrapped.getClass());
+	      
+	       Double doubWrapped = 3.14159;
+	       System.out.println(doubWrapped.getClass());
+	       
+	       
+	       //ex://
+	       int numero = Integer.parseInt("1");
+	       numero = numero +1;
+	       System.out.println(numero);
+	       
+	       
+	       
+	  
+	  //  NO lugar do  Double BigDecimal;
+	      
+	       	       
+			
+		}
+	   	     
+}
+
+

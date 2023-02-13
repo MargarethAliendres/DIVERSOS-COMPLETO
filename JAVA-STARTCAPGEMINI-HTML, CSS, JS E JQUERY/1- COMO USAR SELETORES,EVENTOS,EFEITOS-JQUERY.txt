@@ -1,0 +1,111 @@
+      
+   OBS:  o disparador do evento oU gatilho nao colocar dentro do html e sim dentro do script, diferente do js 
+               que é dentro do html, o motivo é deu problema no evento não mexe no html.
+
+ O JQUERY É UMA BIBLIOTECA COM MUITOS EFEITOS BACANA
+  
+  <body>
+             <!-- SELETORES serão manuseados via jquery-->
+      <input type="text" value="campo nome">
+      <h1 id="titulo"> titulo h1 </h1>
+      <h2 class="subtitulo"> titulo 2</h2>
+
+             <!- EVENTOS serão manuseados via jquery-->      <!-- obs: o disparador do evento o gatilho nao colocar dentro do html e sim dentro do script, diferente do js -->
+    <h1 id="tituloh1"></h1>                                              <!-- que é dentyro do html, o motivo é deuproblema no evento não mexe no html somente no js -->
+    <button id="botao1">Clique aqui</button>
+
+<!--esses EFEITOS serão manuseados via jquery--> 
+    <button id="exibir"> EXIBIR</button> 
+    <button id="ocultar"> OCULTAR</button> 
+    </br>
+    <img src="logo_proway.png">
+
+    <br>
+   <!--esses EFEITOS serão manuseados via jquery-->
+    <button id="exibir2"> exibir</button>
+    <button id="ocultar2">ocultar</button>
+    <br>
+    <h1 id="titi"> aprendendo jquery</h1>
+
+<!--esses EFEITOS f serão manuseados via jquery-->
+    <button id="button3"> CLIQUE AQUI</button>
+    <div></div> <!-- ir no head <style> e fazer as configurações da div, um quadrado-->
+        <!-- depois descer para o script para colocar animação-->
+</div>
+        <!--- <style>
+          div{
+
+          width: 10rem;
+           height: 8rem;
+           background-color: rgb(38, 230, 20);
+             }
+          </style>-->  
+
+
+  </body>
+
+
+                (no rodapé do html)
+      <script src="jquery/jquery-3.3.1.min.js"></script>           
+     
+     <script>      //usar os SELETORES 
+            $(document).ready(function(){                           //(ready) signigfica pronto        //        
+  
+   var campo = $("input").val();        // val fica no lugar de value//
+   var titulo = $("#titulo").html();    // tira o winner e deixa só html , na dive coloca # id//
+   var subtitulo = $(".subtitulo").html(); // tira o winner e deixa só html , na dive coloca . classe//
+       alert(campo);
+       alert(titulo);
+       alert(subtitulo);
+    });
+  
+    //vamos usar EVENTOS  - js//
+    $(document).ready(function(){ 
+         $("#botao1").click(function(){              // coloca o disparador e a função no mesmo local//
+         $("#tituloh1").html("voce clicou no botao");
+        });
+    });
+         //vamos usar eventos e efeitos EXIBIR E OCULTAR - js //
+
+        //exibir//
+        $(document).ready(function(){ 
+
+        $("#exibir").click(function(){
+            $("img").show();  //EXIBIR//
+        });
+         //ocultar
+         $("#ocultar").click(function(){
+            $("img").hide();  //OCULTAR//
+         });  
+       
+    });
+
+     //vamos usar eventos e efeitos FADE tempo de transiçao //
+     $(document).ready(function(){ 
+
+        $("#titi").css("display","none");     // - css - quando documento for carregado, o h1 nao terá visibilidade//
+
+        $("#exibir2").click(function(){         // defaul - tempo padrao 0.4s quando nao especifica nada entre os parenteses
+            $("#titi").fadeIn("slow");          //  slow 0,6s 
+        });                                     // e pode colocar valor ex 3000 equivale 3segundos 
+        $("#ocultar2").click(function(){
+            $("#titi").fadeOut(3000);
+        });
+     });
+
+ //vamos usar eventos e efeitos ANIMATE persiana //
+    $(document).ready(function(){ 
+          
+          $("#button3").click(function() {
+
+              $("div").animate({
+                width:"20rem",
+                heigth:"10rem"
+                               
+              });
+              
+          });
+  
+      });   
+   
+ 

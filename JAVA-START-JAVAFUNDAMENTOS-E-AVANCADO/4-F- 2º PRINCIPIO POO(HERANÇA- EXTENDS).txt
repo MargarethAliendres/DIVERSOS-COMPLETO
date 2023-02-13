@@ -1,0 +1,87 @@
+
+
+* ALGUEM HERDA ALGUMA COISA
+
+                                                                                               //principal   main
+public class Principal {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+	     Juridica jur = new Juridica();
+	     
+	     jur.cnpj = "20202020";
+	     jur.ie = "20504010";
+	     jur.nome = "margaret";
+	     jur.situcaoPessoa = "A";
+
+
+                     Fisica fiz = new Fisica();
+	     
+	     fiz.cpf = "302010";
+	     fiz.nome = "Alegria";
+	     fiz.rg = "504070";
+	     fiz.situcaoPessoa = "B";
+	     
+	    System.out.println("DADOS PESSOA FISICA:" + fiz.toString());
+	     
+	    System.out.println("DADOS PESSOA JURIDICA:");
+	    System.out.println(jur.toString());
+	    
+	}
+
+}
+
+
+
+
+
+
+                                                   //classe pessoa
+public class Pessoa {
+	
+     
+     public String nome;
+     public String situcaoPessoa;
+     
+     
+	@Override
+	public String toString() {
+		return "Pessoa [nome=" + nome + ", situcaoPessoa=" + situcaoPessoa + "]";
+	}
+     
+     
+
+	}
+     
+	     	     	     
+     public class Juridica extends Pessoa {                 //classe juridica
+
+	public String cnpj;
+	public String ie;
+	
+		
+	@Override
+	public String toString() {
+		return "Juridica [cnpj=" + cnpj + ", ie=" + ie + ", nome=" + nome + ", situcaoPessoa=" + situcaoPessoa + "]";
+	}
+	
+		
+}
+
+
+
+   public class Fisica extends Pessoa {                            //classe fisica
+	
+	
+	public String cpf;
+	public String rg;
+	
+	
+	@Override
+	public String toString() {
+		return "Fisica [cpf=" + cpf + ", rg=" + rg + ", nome=" + nome + ", situcaoPessoa=" + situcaoPessoa + "]";
+	}
+	
+		
+}

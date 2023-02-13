@@ -1,0 +1,23 @@
+TIPOS DE HTML
+
+HTML 5
+<!DOCTYPE html>
+
+
+
+HTML 4.01
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//PT-BR" "http://www.w3.org/TR/html4/loose.dtd">
+
+
+
+XHTML 1.0
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//PT-BR " "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+detalhes no site abaixo
+
+https://www.w3.org/QA/2002/04/valid-dtd-list.html

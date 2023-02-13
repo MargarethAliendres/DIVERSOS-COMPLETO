@@ -1,0 +1,272 @@
+
+                                    EXERCICIOS
+
+
+15. Faça um algoritmo que receba um número e diga se este número está no intervalo entre 100 e 200;
+
+                                  leito de dados IF e ELSE
+
+package ComandoLeituraGravação;
+
+import java.util.Scanner;
+
+public class Principal {
+
+
+    public static void main(String[] args) {
+        
+    int numero;
+        
+    Scanner leitor = new Scanner(System.in); 
+                 
+    System.out.println("Digite um valor:");
+    numero = leitor.nextInt();  
+            
+      if (numero >= 100  && numero <= 200) {
+        System.out.println("O numero está no intervalo");
+      } else {
+          System.out.println("O numero nao está no intervalo");
+            }
+          
+      }
+
+
+=============================================================================================================
+                                         EXERCICIO
+
+           24. Faça um algoritmo que receba “N” números e mostre positivo, negativo ou zero para cada número;
+                                          WHILE 
+
+package Repetição;
+
+import java.util.Scanner;
+
+public class Principal {
+
+    public static void main(String[] args) {
+
+       Scanner leitor = new Scanner(System.in);
+       
+       char desejaContinuar = 'S';    // condição de parada//
+              
+       while (desejaContinuar == 'S' || desejaContinuar == 's') { 
+           
+           System.out.println("Digite um numero:");
+           int numero = leitor.nextInt();
+           
+           if (numero == 0) {
+               System.out.println("Numero Zero");
+           }else{
+               if(numero >0){
+                   System.out.println("Numero positivo");
+               } else{
+               System.out.println("Numero negativo");
+                }
+            }
+           
+        System.out.println("Deseja continuar: S- sim, N - nao");
+        desejaContinuar = leitor.next().charAt(0);  // vai pegar a primeira letra do que vai ser digitado//
+           
+           
+       }
+    }
+}
+
+
+ ===========================================================================================================
+ 
+                                  EXERCICIO
+
+  2. Faça um algoritmo que receba o preço de custo e o preço de venda de 40 produtos. Mostre como resultado
+   se houve lucro, prejuízo ou empate para cada produto. Informe o valor de custo de cada produto, o valor
+   de venda de cada produto, média de preço de custo e do preço de venda;
+                                     
+                                  FOR
+
+package Repetição;
+
+import java.util.Scanner;
+
+public class Principal {
+
+    public static void main(String[] args) {
+
+       Scanner leitor = new Scanner (System.in);
+        
+       String nomeProduto;           //essas variaveis fora do for é para a cada repetição nao criar novas variaveis e economizar memoria 
+       float preçoCusto;
+       float preçoVenda;
+       
+       float totalCusto = 0.0f;           //sempre valor incial antes de iniciar calculo
+       float totalVenda = 0.0f;
+       
+        int i = 0;      // colocou essa variavel fora, para ser nao so do FOR, mas para ela ser de todo o metodo main.
+                
+        for (; i < 3; i++) {     // aqui inicia com ; pois o i ja foi iniciado acima
+            
+            System.out.println("Digite o nome do produto: ");
+            nomeProduto = leitor.next();        // O PROF. COLOCA nextLine, mas no meu  nao da certo. coloco só next
+            
+            System.out.println("Digite o preço de custo: ");  // letra maiuscula aqui no Float
+            preçoCusto = leitor.nextFloat();
+            
+            System.out.println("Digite o preço de venda: "); //letra maiuscula aqui no Float
+            preçoVenda = leitor.nextFloat();
+            
+            
+            
+            totalCusto = totalCusto + preçoCusto;         // sempre tem que ter um valor inicial antes de calcular
+            totalVenda = totalVenda + preçoVenda;
+
+                
+            
+            if(preçoCusto == preçoVenda){
+                 System.out.println ("Empate");
+                }else{  
+                if(preçoCusto <preçoVenda){
+                 System.out.println ("Lucro");
+                }else{
+                   System.out.println ("prejuizo");
+               }   
+            }
+            
+         System.out.println(nomeProduto + ", Preço de custo: " + preçoCusto + ", Valor de venda: " + preçoVenda );
+            
+        }
+            
+         System.out.println ("A média do preço de custo é de: " + (totalCusto / i ));                 //   fora do FOR
+         System.out.println ("A média do preço de venda é de: " + (totalVenda / i ));                               
+                  
+        }
+    }
+
+===========================================================================================================
+                                   EXERCICIO
+
+
+ 20. A concessionária de veículos “CARANGO VELHO” está vendendo os seus veículos com desconto. Faça
+um algoritmo que calcule e exiba o valor do desconto e o valor a ser pago pelo cliente de vários carros. O
+desconto deverá ser calculado de acordo com o ano do veículo. Até 2000 - 12% e acima de 2000 - 7%. O
+sistema deverá perguntar se deseja continuar calculando desconto até que a resposta seja: “(N) Não”.
+Informar total de carros com ano até 2000 e total geral;
+
+
+
+
+package exercicios20;
+
+import java.util.Scanner;
+
+
+public class Main {
+  
+    public static void main(String[] args) {
+        
+        Scanner leitor = new Scanner (System.in);
+        
+        int anoFabricacao = 0;
+        float valorCarro = 0.0f;
+        float porcentagemDesconto = 0.0f;
+        float valorDesconto = 0.0f;
+        float valorPagar = 0.0f;
+        
+        int totalCarrosSeminovos = 0;
+        int totalCarros = 0;
+        
+        char desejaRepetir = 'S';
+        
+        while (desejaRepetir == 's' || desejaRepetir == 'S' ){
+            
+            System.out.println("Digite o nao de fabricaçao:");
+            anoFabricacao = leitor.nextInt();
+            
+            System.out.println("Digite o nao de fabricaçao:");
+            valorCarro = leitor.nextFloat();
+            
+            if (anoFabricacao <= 2000) {
+              porcentagemDesconto = 0.12f;
+
+            }else { 
+              porcentagemDesconto = 0.07f;
+              totalCarrosSeminovos++;
+            }
+            
+           totalCarros++;  
+            
+           valorDesconto = valorCarro * porcentagemDesconto; 
+           valorPagar = valorCarro - valorDesconto;
+           
+           System.out.println("Valor a pagar" + valorPagar);
+           System.out.println("Valor do desconto" + valorDesconto);
+           
+           System.out.println("Deseja fazer mais cadatros S-sim / N-Nao");
+           desejaRepetir = leitor.next().charAt(0);  //pega so a primeira palavra//
+                      
+            } 
+            
+      System.out.println("Total de carros seminovos" + totalCarrosSeminovos);
+      System.out.println("Total de carros " + totalCarros);
+            
+        }        
+    }
+    
+
+
+    
+package exercicios20;
+
+import java.util.Scanner;
+
+
+public class Main {
+  
+    public static void main(String[] args) {
+        
+        Scanner leitor = new Scanner (System.in);
+        
+        int anoFabricacao = 0;
+        float valorCarro = 0.0f;
+        float porcentagemDesconto = 0.0f;
+        float valorDesconto = 0.0f;
+        float valorPagar = 0.0f;
+        
+        int totalCarrosSeminovos = 0;
+        int totalCarros = 0;
+        
+        char desejaRepetir = 'S';
+        
+        while (desejaRepetir == 's' || desejaRepetir == 'S' ){
+            
+            System.out.println("Digite o nao de fabricaçao:");
+            anoFabricacao = leitor.nextInt();
+            
+            System.out.println("Digite o nao de fabricaçao:");
+            valorCarro = leitor.nextFloat();
+            
+            if (anoFabricacao <= 2000) {
+              porcentagemDesconto = 0.12f;
+
+            }else { 
+              porcentagemDesconto = 0.07f;
+              totalCarrosSeminovos++;
+            }
+            
+           totalCarros++;  
+            
+           valorDesconto = valorCarro * porcentagemDesconto; 
+           valorPagar = valorCarro - valorDesconto;
+           
+           System.out.println("Valor a pagar" + valorPagar);
+           System.out.println("Valor do desconto" + valorDesconto);
+           
+           System.out.println("Deseja fazer mais cadatros S-sim / N-Nao");
+           desejaRepetir = leitor.next().charAt(0);  //pega so a primeira palavra//
+                      
+            } 
+            
+      System.out.println("Total de carros seminovos" + totalCarrosSeminovos);
+      System.out.println("Total de carros " + totalCarros);
+            
+        }        
+    }
+    

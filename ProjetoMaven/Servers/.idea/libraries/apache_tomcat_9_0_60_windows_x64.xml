@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="apache-tomcat-9.0.60-windows-x64">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/web/apache-tomcat-9.0.60-windows-x64.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

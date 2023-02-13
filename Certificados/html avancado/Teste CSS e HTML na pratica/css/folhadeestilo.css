@@ -1,0 +1,19 @@
+/* imagem fundo pagina*/
+
+body {
+	background: fixed; background-image: url("foto.png");  background-color:#ff5010; background-repeat: repeat-y; ;
+}
+
+
+
+
+
+
+/* cor da fonte paragrafo*/
+
+p{color:red;}
+
+
+table {font-size: 20px; }
+
+	

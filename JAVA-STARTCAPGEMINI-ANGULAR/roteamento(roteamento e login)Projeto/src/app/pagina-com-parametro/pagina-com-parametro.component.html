@@ -1,0 +1,8 @@
+<p>Parametro da rota:{{id}}</p>
+
+<p *ngIf="nome"> query param de nome:{{nome}}</p>
+<p *ngIf="idade"> query param de idade:{{idade}}</p>
+
+<!--esse *ngIf significa se eu tiver nome ou se eu tiver idade-->
+<!-- só vai aparecer algo se eu preencher no browser as inforaç~es de consulta -->
+<!-- http://localhost:4200/pagina-com-parametro/4?nome=joao&idade=23-->
